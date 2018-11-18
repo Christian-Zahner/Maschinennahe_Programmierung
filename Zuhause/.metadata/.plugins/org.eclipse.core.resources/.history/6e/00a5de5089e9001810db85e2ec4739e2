@@ -1,0 +1,13 @@
+/***********************************
+ * Headerfilename: UE05_Mymemcopy.h*
+ * Created on	 : Nov 16, 2018    *
+ * Author		 : Christian Zahner*
+ ***********************************/
+
+#ifndef UE05_MYMEMCOPY_H_
+#define UE05_MYMEMCOPY_H_
+
+//void* mymemcopy(void* ziel, const void* quelle, size_t anzahl);
+void* mymemcopy();
+
+#endif /* UE05_MYMEMCOPY_H_ */

@@ -1,0 +1,27 @@
+/***********************************
+ * Filename		 : UE05_Mymemcopy.c*
+ * Created on	 : Nov 15, 2018    *
+ * Author		 : Christian Zahner*
+ ***********************************/
+#include "UART0.h"
+#include "support_common.h"  // include peripheral declarations and more; 
+#include "uart_support.h"    // universal asynchronous receiver transmitter,
+                             // (d.h. die serielle Schnittstelle)
+#include "terminal_wrapper.h"
+
+#include "UE05_Mymemcopy.h"
+
+
+/****************************************************************
+ * Uebung5: mymemcopy											*
+ * 			Erstellung und Test eines Unterprogramms mymemcopy.	*
+ * 			Aufruf des Unterprogramms aus C.					*
+ * 			Funktionskopf in C									*
+ * 			Eingangs-, Ausgangs-, 								*
+ * 			Frame- und Return-Code in Assembler					*
+ ****************************************************************/
+
+  char strg1[20] 	= "String1";
+  char strg2[20] 	= "leer";
+
+

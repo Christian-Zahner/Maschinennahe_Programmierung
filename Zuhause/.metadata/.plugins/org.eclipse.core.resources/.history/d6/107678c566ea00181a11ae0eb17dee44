@@ -1,0 +1,12 @@
+/***********************************
+ * Headerfilename: UE01_Strgout.h  *
+ * Created on	 : Nov 17, 2018    *
+ * Author		 : Christian Zahner*
+ ***********************************/
+
+#ifndef UE01_STRGOUT_H_
+#define UE01_STRGOUT_H_
+
+void strgout(char[]);
+
+#endif /* UE01_STRGOUT_H_ */

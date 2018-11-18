@@ -1,0 +1,63 @@
+/***********************************
+ * Filename		 : UE05_Mymemcopy.c*
+ * Created on	 : Nov 15, 2018    *
+ * Author		 : Christian Zahner*
+ ***********************************/
+#include "UART0.h"
+#include "support_common.h"  // include peripheral declarations and more; 
+#include "uart_support.h"    // universal asynchronous receiver transmitter,
+                             // (d.h. die serielle Schnittstelle)
+#include "terminal_wrapper.h"
+#include <stdio.h>
+
+
+#include "UE05_Mymemcopy.h"
+
+
+/****************************************************************
+ * Uebung5: mymemcopy											*
+ * 			Erstellung und Test eines Unterprogramms mymemcopy.	*
+ * 			Aufruf des Unterprogramms aus C.					*
+ * 			Funktionskopf in C									*
+ * 			Eingangs-, Ausgangs-, 								*
+ * 			Frame- und Return-Code in Assembler					*
+ ****************************************************************/
+
+
+	void* mymemcopy(void* ziel, const void* quelle, size_t anzahl)
+	{
+
+		TERM_WriteString("\r\n########################################################################\r\n");
+		TERM_WriteString("\r\nUebung05: mymmemcopy\r\n");
+		TERM_WriteString("Erstellung und Test eines Unterprogramms mymemcopy \(analog zu memcopy\)\r\n");
+		TERM_WriteString("und Aufruf des Unterprogramms aus C\r\n");
+		TERM_WriteString("\r\n########################################################################\r\n");
+		
+		
+		asm{ naked
+
+				link a6,#0				//FP sichern
+				adda #-12,sp			//SP auf FP setzen
+				movem.l d2/a2-a3,(sp)	//Register sichern
+				
+				move.l 16(a6),d2		//Anzahl = d2
+				move.l 12(a6),a2		//Quelle = a2
+				move.l 8(a6),a3			//Ziel = a3
+			
+		Loop:
+				move.b (a2)+, (a3)+
+				//bne Loop					 //compares a2 if equal to a3 break;
+
+					
+					move.l  8(a6),a0		//Ziel nach a0 rückgabewert
+					movem.l (sp),d2/a2-a3	//Register holen vom Stack	
+					adda #12,sp				//Speicherfreigeben SP
+					unlk a6					//FP vom Stack nehmen
+					rts
+
+		TERM_WriteString("\r\n\r\n########################################################################\r\n\n");
+				
+			
+		}
+
+	}
