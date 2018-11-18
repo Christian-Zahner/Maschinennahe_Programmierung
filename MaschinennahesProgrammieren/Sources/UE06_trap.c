@@ -31,7 +31,7 @@ void IntroUe07(){
 	TERM_WriteString("\nUebung07: Trap-Befehl\r\n");
 	TERM_WriteString("Simulieren sie einen \"Betriebssystemaufruf\" mit dem Trap-Befehl\r\n");
 	TERM_WriteString("verwenden Sie eine einfache Stringausgabe als Ersatz fuer die\r\n");
-	TERM_WriteString("Betriebssystemfunktion\, uebergeben Sie die Stringadresse \r\n");
+	TERM_WriteString("Betriebssystemfunktion, uebergeben Sie die Stringadresse \r\n");
 	TERM_WriteString("als Parameter \"Betriebssystem\"\r\n");
 	TERM_WriteString("\n########################################################################\r\n");
 }
