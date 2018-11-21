@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;MaschinennahesProgrammieren/Sources/UE06_trap.c&apos; to &apos;UE07_trap.c&apos;" description="Rename resource &apos;UE06_trap.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Sources/UE06_trap.c" name="UE07_trap.c" stamp="1542817697573" updateReferences="true"/>
+</session>
