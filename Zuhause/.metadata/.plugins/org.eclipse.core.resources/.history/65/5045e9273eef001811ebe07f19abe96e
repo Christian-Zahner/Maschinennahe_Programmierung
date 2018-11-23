@@ -1,0 +1,15 @@
+/************************************
+ * Filename		 : UE08_liste.c	    *
+ * Created on	 : Nov 23, 2018		*
+ * Author		 : Christian Zahner	*
+ ************************************/
+
+#include "UART0.h"
+#include "support_common.h"  // include peripheral declarations and more; 
+#include "uart_support.h"    // universal asynchronous receiver transmitter,
+                             // (d.h. die serielle Schnittstelle)
+#include "terminal_wrapper.h"
+#include "Intro.h"
+#include <stdio.h>
+
+#include "UE02A_Strings.h"

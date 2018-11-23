@@ -31,30 +31,29 @@
   2000115A 0000011A .text   uart_init	(uart_support_c.obj)
   20001274 00000040 .text   uart_putchar	(uart_support_c.obj)
   200012B4 0000002A .text   InitializeUART	(uart_support_c.obj)
-  200012DE 00000082 .text   TERM_WriteString	(terminal_wrapper_c.obj)
-  20001360 00000072 .text   main	(main_c.obj)
-  200013D2 00000206 .text   mcf_exception_handler	(exceptions_c.obj)
-  200015D8 00000022 .text   asm_exception_handler	(exceptions_c.obj)
-  200015FA 000000A6 .text   trap	(UE07_trap_c.obj)
-  200016A0 0000006C .text   IntroUe07	(UE07_trap_c.obj)
-  2000170C 00000018 .text   outro	(UE05_mymemcopy_c.obj)
-  20001724 00000018 .text   test	(Intro_c.obj)
-  2000173C 0000000C .text   _ewl_exit	(librt.a abort_exit.o   )
-  20001748 0000001C .text   __call_static_initializers	(librt.a cf_staticinitia)
-  20001764 0000002C .text   __destroy_global_chain	(librt.a cf_staticinitia)
-  20001790 00000014 .rodata @47	(main_c.obj)
-  200017A4 00000014 .rodata @49	(main_c.obj)
-  200017B8 0000004C .rodata @51	(UE07_trap_c.obj)
-  20001804 00000019 .rodata @52	(UE07_trap_c.obj)
-  2000181D 00000042 .rodata @53	(UE07_trap_c.obj)
-  2000185F 00000040 .rodata @54	(UE07_trap_c.obj)
-  2000189F 0000003C .rodata @55	(UE07_trap_c.obj)
-  200018DB 00000021 .rodata @56	(UE07_trap_c.obj)
-  200018FC 0000004D .rodata @57	(UE07_trap_c.obj)
-  20001949 0000004F .rodata @67	(UE05_mymemcopy_c.obj)
-  20001998 00000016 .rodata @56	(Intro_c.obj)
-#>200019B0          ___ROM_AT (linker command file)
-#>200019B0          ___DATA_ROM (linker command file)
+  200012DE 00000090 .text   TERM_WriteLn	(terminal_wrapper_c.obj)
+  2000136E 00000082 .text   TERM_WriteString	(terminal_wrapper_c.obj)
+  200013F0 00000072 .text   main	(main_c.obj)
+  20001462 00000206 .text   mcf_exception_handler	(exceptions_c.obj)
+  20001668 00000022 .text   asm_exception_handler	(exceptions_c.obj)
+  2000168A 0000000E .text   lstint	(UE08_liste_c.obj)
+  20001698 00000050 .text   IntroUe08	(UE08_liste_c.obj)
+  200016E8 00000018 .text   outro	(UE05_mymemcopy_c.obj)
+  20001700 00000018 .text   test	(Intro_c.obj)
+  20001718 0000000C .text   _ewl_exit	(librt.a abort_exit.o   )
+  20001724 0000001C .text   __call_static_initializers	(librt.a cf_staticinitia)
+  20001740 0000002C .text   __destroy_global_chain	(librt.a cf_staticinitia)
+  2000176C 00000014 .rodata @47	(main_c.obj)
+  20001780 00000014 .rodata @49	(main_c.obj)
+  20001794 0000004C .rodata @48	(UE08_liste_c.obj)
+  200017E0 00000039 .rodata @49	(UE08_liste_c.obj)
+  20001819 00000033 .rodata @50	(UE08_liste_c.obj)
+  2000184C 0000002C .rodata @51	(UE08_liste_c.obj)
+  20001878 0000004D .rodata @52	(UE08_liste_c.obj)
+  200018C5 0000004F .rodata @67	(UE05_mymemcopy_c.obj)
+  20001914 00000016 .rodata @56	(Intro_c.obj)
+#>2000192C          ___ROM_AT (linker command file)
+#>2000192C          ___DATA_ROM (linker command file)
 
 # .data
 #>20009100          ___DATA_RAM (linker command file)
@@ -67,39 +66,35 @@
   20009100 00000004         static initializer	(linker generated)
 #>20009104          __START_DATA (linker command file)
   20009104 00000002 .data   __2209sdfjkl_init	(terminal_wrapper_c.obj)
-  20009106 00000015 .data   strtxt	(UE07_trap_c.obj)
-  2000911B 00000039 .data   bstxt	(UE07_trap_c.obj)
-  20009154 00000013 .data   endtxt	(UE07_trap_c.obj)
-#>20009168          __END_DATA (linker command file)
-#>20009168          __START_SDATA (linker command file)
-#>20009168          __END_SDATA (linker command file)
-#>20009168          ___DATA_END (linker command file)
-#>20009168          __SDA_BASE (linker command file)
+#>20009108          __END_DATA (linker command file)
+#>20009108          __START_SDATA (linker command file)
+#>20009108          __END_SDATA (linker command file)
+#>20009108          ___DATA_END (linker command file)
+#>20009108          __SDA_BASE (linker command file)
 
 # .bss
-#>20009168          ___BSS_START (linker command file)
-#>20009168          __START_SBSS (linker command file)
-#>20009168          __END_SBSS (linker command file)
-#>20009168          __START_BSS (linker command file)
-  20009168 00000028 .bss    usrstack	(UE07_trap_c.obj)
-  20009190 00000004 .bss    __global_destructor_chain	(librt.a cf_staticinitia)
-#>20009194          __END_BSS (linker command file)
-#>20009194          ___BSS_END (linker command file)
+#>20009108          ___BSS_START (linker command file)
+#>20009108          __START_SBSS (linker command file)
+#>20009108          __END_SBSS (linker command file)
+#>20009108          __START_BSS (linker command file)
+  20009108 00000004 .bss    __global_destructor_chain	(librt.a cf_staticinitia)
+#>2000910C          __END_BSS (linker command file)
+#>2000910C          ___BSS_END (linker command file)
 
 # .custom
-#>20009194          ___HEAP_START (linker command file)
-#>20009194          ___heap_addr (linker command file)
-#>2000A194          ___HEAP_END (linker command file)
-#>2000A194          ___SP_END (linker command file)
-#>2000B194          ___SP_INIT (linker command file)
+#>2000910C          ___HEAP_START (linker command file)
+#>2000910C          ___heap_addr (linker command file)
+#>2000A10C          ___HEAP_END (linker command file)
+#>2000A10C          ___SP_END (linker command file)
+#>2000B10C          ___SP_INIT (linker command file)
 #>20000000          ___VECTOR_RAM (linker command file)
-#>2000B194          __SP_INIT (linker command file)
-#>2000A194          ___mem_limit (linker command file)
+#>2000B10C          __SP_INIT (linker command file)
+#>2000A10C          ___mem_limit (linker command file)
 #>00000010          ___stack_safety (linker command file)
-#>20001A18          _romp_at (linker command file)
+#>20001934          _romp_at (linker command file)
 
 # .romp
-#>20001A18          __S_romp (linker command file)
+#>20001934          __S_romp (linker command file)
 
 
 # Memory map:
@@ -107,12 +102,12 @@
   20000000 20000000 00000000 .vectorram vectorram
   20000500 20000500 00000000 .code      code
   20000500 20000500 00000400 .vectors   code
-  20000900 20000900 000010B0 .text      code
+  20000900 20000900 0000102C .text      code
   20009100 20009100 00000000 .userram   userram
-  20009100 200019B0 00000068 .data      userram
-  20009168 20009168 0000002C .bss       userram
-  20009194 20009194 00000000 .custom    userram
-  20009194 20001A18 00000018 .romp      userram
+  20009100 2000192C 00000008 .data      userram
+  20009108 20009108 00000004 .bss       userram
+  2000910C 2000910C 00000000 .custom    userram
+  2000910C 20001934 00000018 .romp      userram
 
-# Link start time: Wed Nov 21 18:25:08 2018
-# Link end time: Wed Nov 21 18:25:09 2018
+# Link start time: Fri Nov 23 17:48:36 2018
+# Link end time: Fri Nov 23 17:48:36 2018

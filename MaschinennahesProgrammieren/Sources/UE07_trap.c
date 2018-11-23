@@ -19,7 +19,7 @@
 int usrstack[20];
 
 char strtxt[]  = "Start Userprogramm\r\n";
-char bstxt[]   = "Ausgabe via BS-Aufruf via TRAP (wechsel Systemmode)!!!\r\n";
+char bstxt[]   = "Ausgabe via BS-Aufruf via TRAP (wechseln in Systemmode)!!!\r\n";
 char endtxt[]  = "Ende Programm!!!\r\n";
 
 void trap(){

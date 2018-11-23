@@ -36,11 +36,13 @@
 // Include der Uebungsheader
 
 #include "UE01_Strgout.h"
+#include "UE02A_Strings.h"
 #include "UE03_Hex.h"
 #include "UE04_HexUp.h"
 #include "UE05_Mymemcopy.h"
 #include "UE06_Illegal.h"
 #include "UE07_Trap.h"
+#include "UE08_Liste.h"
 
 // - Bitte darauf achten, dass am Coldfire-Serial Port ein  
 //   Terminal (Putty o.ä.) mit 19200kBaud angeschlossen ist.
@@ -86,6 +88,14 @@ void main(void)
   	//strgoutrevalt();		 // Mittels Adressversatz
   	
   	outro();*/	
+  	
+  /**** Uebung 02a ***************************************************************/ 
+    
+    /*IntroUe02a();
+    	 
+    strings();
+    	
+    outro();*/	
   
   /**** Uebung 03 ***************************************************************/
   
@@ -126,11 +136,11 @@ void main(void)
   
 	/**** Uebung 07 ***************************************************************/
   
-  	IntroUe07();
+  	/*IntroUe07();
   
 	trap();
   
-  	outro();
+  	outro();*/
 	
 	/**** Uebung 07a **************************************************************/
   
@@ -139,7 +149,11 @@ void main(void)
 	
 	/**** Uebung 08 ***************************************************************/
   
-	//lstint();
+  	IntroUe08();
+  	
+	lstint();
+	
+    outro();
   
 	
 	/**** Uebung 09 ***************************************************************/
