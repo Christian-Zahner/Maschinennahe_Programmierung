@@ -1,5 +1,10 @@
 Repository für MnP
-Beide Ordner werden benötigt
-Ordner Zuhause als Workbench von CodeWarrior auswählen
+
+Ordner Zuhause nicht als Workbench von CodeWarrior auswählen
+Das führt zu einen Fehler lieber neu machen
+
 Ordner MaschinennahesProgrammieren enthält Header Sourcefiles usw.
-Evtl. Importieren von Ordner MaschinennahesProgrammieren als Projekt
+
+Wichtig! 
+Importieren von Ordner MaschinennahesProgrammieren als Projekt
+in die neue Workbench!!!
