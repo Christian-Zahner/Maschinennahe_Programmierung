@@ -30,7 +30,7 @@ void     *anker = NULL;
 	     
   asm {
 
-     schleife: // intialisiern von d0 und d7 test später erst 
+     schleife:  
 
              // Zahl einlesen (Ende vereinfachend mit Wert 0)
              //----------------------------------------------
@@ -83,21 +83,11 @@ void     *anker = NULL;
   //-------------------------
 
        // Iterator-Pärchen initialisieren
-     	 
-     	 	 lea 		anker,	a3    //effektive Adresse von Anker (also Adresse von Anker selbst)
-     	 	 move.l 	anker,	a2    //Adresse auf die Anker zeigt in a2
-     
-     
+
 	   
 	   
-  naechstes:    // weiterschalten bis a2 auf NULL zeigt
-  	  	  	  	  
-  	  	  	  tst.l 	 a2			//test ob NULL übersetzung des 0-Bytes ist Listenende 
-  	  	  	  beq		 gefunden	//wenn ende gefunden dann Sprung zu gefunden
-  	  	  	  
-  	  	  	  // cmp nur auf Long ext.l
-  	  	  	  
-  	  	  	  
+  naechstes:      
+
   
   
   
@@ -105,9 +95,7 @@ void     *anker = NULL;
   
   
   
-  	  	  	  lea 		2(a2), a3		// wir wollen ja den Pointer von dem auf was a2 zeigt
-  	  	  	  	  	  	  	  	  	
-  	  	  	  move.l	  a3,  a2		// wir wollen ja die nächste Zahl also auf das was a3 jetzt zeigt
+  
   
   
   // Einfügestelle gefunden: Objekt einhängen

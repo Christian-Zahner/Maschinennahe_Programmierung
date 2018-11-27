@@ -30,7 +30,7 @@ void     *anker = NULL;
 	     
   asm {
 
-     schleife: // intialisiern von d0 und d7 test später erst 
+     schleife:  
 
              // Zahl einlesen (Ende vereinfachend mit Wert 0)
              //----------------------------------------------
