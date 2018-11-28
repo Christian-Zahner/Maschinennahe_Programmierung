@@ -7,7 +7,7 @@
 #ifndef UE08_LISTE_H_
 #define UE08_LISTE_H_
 
-void lstint();
+int lstint(void);
 void IntroUe08();
 
 #endif /* UE08_LISTE_H_ */

@@ -26,28 +26,36 @@ char     msgfehler[] = "\nFehler bei malloc() !\n";
 void     *anker = NULL;
 
 
- void lstint(){
+int lstint(void){
+	
+	
 	     
   asm {
 
-     schleife: // intialisiern von d0 und d7 test später erst 
+ schleife: // intialisiern von d0 und d7 test später erst 
 
              // Zahl einlesen (Ende vereinfachend mit Wert 0)
              //----------------------------------------------
- 
-
-
-
-
-
-
+     	 	 
+ 	 	 	 clr.l		d0		 			 // do mit 0 initialisieren
+     	 	 pea 		msginput 			 // msginput Adresse auf Stack 	 
+     	 	 jsr		TERM_WriteString	
+     	 	 adda		#4, SP				 // Stack bereinigen
+     	 	 
+     	 	 // Zahl einlesen
+     	 	 jsr		INOUT_ReadInt		 // liest Int vom Terminal
+ 	 	 	 
+ 	 	 	 tst.l 		d0					 // Zerobyte test beendet Schleife
+ 	 	 	 bge		ausgabe
+ 	 	 	 move.l		d0, d7				 // eingelesene Zahl in d7
 
  
              // Einzuhängendes Element aufbauen
              // -------------------------------
              // Mit malloc; malloc erwartet den Parameter im Register D0,
 			 // weil dafür "register_abi" gilt (nicht compact_abi)
-
+ 	 	 	 
+ 	 	 	 
 
 
 
@@ -96,8 +104,8 @@ void     *anker = NULL;
   	  	  	  beq		 gefunden	//wenn ende gefunden dann Sprung zu gefunden
   	  	  	  
   	  	  	  // cmp nur auf Long ext.l
+  	  	  	  move.w	(a2), d0
   	  	  	  
-  	  	  	  
   
   
   
@@ -105,10 +113,10 @@ void     *anker = NULL;
   
   
   
-  	  	  	  lea 		2(a2), a3		// wir wollen ja den Pointer von dem auf was a2 zeigt
+  	  	  	  move.l	2(a2), a3		// wir wollen ja den Pointer von dem auf was a2 zeigt, alternativ mit lea
   	  	  	  	  	  	  	  	  	
-  	  	  	  move.l	  a3,  a2		// wir wollen ja die nächste Zahl also auf das was a3 jetzt zeigt
-  
+  	  	  	  move.l	a3,  a2			// wir wollen ja die nächste Zahl also auf das was a3 jetzt zeigt
+  	  	  	  bra 		naechstes
   
   // Einfügestelle gefunden: Objekt einhängen
   //-----------------------------------------                
@@ -145,7 +153,7 @@ void     *anker = NULL;
  	
  	TERM_WriteString("\n########################################################################\r\n");
  	TERM_WriteString("\nUebung08: Aufbau und Ausgabe einer einfach verkettetn\r\n");
- 	TERM_WriteString("          und sortierteb Liste von Integerzahlen\r\n");
+ 	TERM_WriteString("          und sortierten Liste von Integerzahlen.\r\n");
  	TERM_WriteString("Verwenden sie die Vorgabe UEB08_Vorgabe.c\r\n");
  	TERM_WriteString("\n########################################################################\r\n\n");
  	
