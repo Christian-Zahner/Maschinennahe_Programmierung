@@ -6,6 +6,8 @@
 
 // Nach Vorgabe von Dr. Prof. Tempelmeier 
 
+#pragma compact_abi
+
 #include "UART0.h"
 #include "support_common.h"  // include peripheral declarations and more; 
 #include "uart_support.h"    // universal asynchronous receiver transmitter,
@@ -39,7 +41,7 @@ int lstint(void){
              // Zahl einlesen (Ende vereinfachend mit Wert 0)
              //----------------------------------------------
      	 	 
- 	 	 	  clr.l		d0		 			 // do mit 0 initialisieren
+ 	 	 	  clr.l		d0		 			 // d0 mit 0 initialisieren
      	 	  pea 		msginput 			 // msginput Adresse auf Stack 	 
      	 	  jsr		TERM_WriteString	
      	 	  adda		#4, SP				 // Stack bereinigen
@@ -159,6 +161,7 @@ ausschleife:
      	 	  adda		#4, SP				// Stack bereinigen
      	 	  
 			  //jsr		TERM_WriteLn		// Falls man die Liste unter einander ausgegeben haben will
+     	 	  
 			  //weiterschalten des Iterators
 			  move.l 	2(a2), a2			// weiterschalten auf das nächste Element der Liste
 			  bra		ausschleife

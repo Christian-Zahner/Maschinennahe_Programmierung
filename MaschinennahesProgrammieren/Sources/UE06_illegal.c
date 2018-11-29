@@ -4,6 +4,8 @@
  * Author		 : Christian Zahner	*
  ************************************/
 
+#pragma compact_abi
+
 #include "UART0.h"
 #include "support_common.h"  // include peripheral declarations and more; 
 #include "uart_support.h"    // universal asynchronous receiver transmitter,
