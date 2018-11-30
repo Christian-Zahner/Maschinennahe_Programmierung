@@ -1,0 +1,133 @@
+
+
+#>00001000          ___heap_size (linker command file)
+#>00001000          ___stack_size (linker command file)
+#>40000000          ___IPSBAR (linker command file)
+#>20000000          ___RAMBAR (linker command file)
+#>00010000          ___RAMBAR_SIZE (linker command file)
+#>00000000          ___FLASHBAR (linker command file)
+#>00080000          ___FLASHBAR_SIZE (linker command file)
+#>2000FFFC          ___SP_AFTER_RESET (linker command file)
+
+# .userram
+
+# .code
+
+# .vectorram
+
+# .vectors
+  20000500 00000400 .vectortable _vect	(exceptions_c.obj)
+
+# .text
+  20000900 00000060 .text   UART0_Init	(UART0_c.obj)
+  20000960 000000C6 .text   __initialize_hardware	(Cpu_c.obj)
+  20000A26 0000038A .text   PE_low_level_init	(Cpu_c.obj)
+  20000DB0 00000008 .text   __initialize_system	(startcf_c.obj)
+  20000DB8 0000006C .text   __copy_rom_section	(startcf_c.obj)
+  20000E24 0000005E .text   __copy_rom_sections_to_ram	(startcf_c.obj)
+  20000E82 00000004 .text   _ExitProcess	(startcf_c.obj)
+  20000E86 0000022A .text   clear_mem	(startcf_c.obj)
+  200010B0 000000AA .text   _startup	(startcf_c.obj)
+  2000115A 0000011A .text   uart_init	(uart_support_c.obj)
+  20001274 00000040 .text   uart_putchar	(uart_support_c.obj)
+  200012B4 0000002A .text   InitializeUART	(uart_support_c.obj)
+  200012DE 00000090 .text   TERM_WriteLn	(terminal_wrapper_c.obj)
+  2000136E 00000082 .text   TERM_WriteString	(terminal_wrapper_c.obj)
+  200013F0 000000E8 .text   main	(main_c.obj)
+  200014D8 00000206 .text   mcf_exception_handler	(exceptions_c.obj)
+  200016DE 00000022 .text   asm_exception_handler	(exceptions_c.obj)
+  20001700 00000098 .text   __write_console	(console_io_c.obj)
+  20001798 00000040 .text   bitrevUp	(UE07A_bitrev_c.obj)
+  200017D8 0000008C .text   printbit	(UE07A_bitrev_c.obj)
+  20001864 00000050 .text   IntroUe07A	(UE07A_bitrev_c.obj)
+  200018B4 00000018 .text   outro	(UE05_mymemcopy_c.obj)
+  200018CC 00000018 .text   test	(Intro_c.obj)
+  200018E4 00000020 .text   __ConsoleWrite	(libc.a printf.o       )
+  20001904 00000022 .text   printf_console	(libc.a printf.o       )
+  20001926 0000001E .text   isdigit	(libc.a strtoul.o      )
+  20001944 00000020 .text   memchr	(libc.a mem.o          )
+  20001964 00000010 .text   strlen	(libc.a string.o       )
+  20001974 00000028 .text   strchr	(libc.a string.o       )
+  2000199C 000002BA .text   parse_format	(libc.a printformat_.o )
+  20001C56 0000002A .text   set_base	(libc.a printformat_.o )
+  20001C80 000000D6 .text   justify_conversion	(libc.a printformat_.o )
+  20001D56 00000116 .text   long2str	(libc.a printformat_.o )
+  20001E6C 000003FC .text   __pformatter	(libc.a printformat_.o )
+  20002268 0000000C .text   _ewl_exit	(librt.a abort_exit.o   )
+  20002274 0000001C .text   __call_static_initializers	(librt.a cf_staticinitia)
+  20002290 0000002C .text   __destroy_global_chain	(librt.a cf_staticinitia)
+  200022BC 00000014 .rodata @49	(main_c.obj)
+  200022D0 00000014 .rodata @51	(main_c.obj)
+  200022E4 0000003B .rodata @58	(main_c.obj)
+  2000231F 0000003B .rodata @59	(main_c.obj)
+  2000235A 0000004C .rodata @59	(UE07A_bitrev_c.obj)
+  200023A6 0000004C .rodata @60	(UE07A_bitrev_c.obj)
+  200023F2 0000004A .rodata @61	(UE07A_bitrev_c.obj)
+  2000243C 0000002A .rodata @62	(UE07A_bitrev_c.obj)
+  20002466 0000004D .rodata @63	(UE07A_bitrev_c.obj)
+  200024B3 0000004F .rodata @67	(UE05_mymemcopy_c.obj)
+  20002502 00000016 .rodata @56	(Intro_c.obj)
+  20002518 00000081 .rodata _ctypes_	(libc.a ctype.o        )
+  20002599 00000001 .rodata @609	(libc.a printformat_.o )
+#>2000259C          ___ROM_AT (linker command file)
+#>2000259C          ___DATA_ROM (linker command file)
+
+# .data
+#>20009100          ___DATA_RAM (linker command file)
+#>20009100          __exception_table_start__ (linker command file)
+# Exception index
+  20009100 00000000         Exception Table Index	()
+#>20009100          __exception_table_end__ (linker command file)
+#>20009100          ___sinit__ (linker command file)
+# Linker generated symbols
+  20009100 00000004         static initializer	(linker generated)
+#>20009104          __START_DATA (linker command file)
+  20009104 00000002 .data   __2209sdfjkl_init	(terminal_wrapper_c.obj)
+  20009106 00000002 .data   zer	(UE07A_bitrev_c.obj)
+  20009108 00000002 .data   on	(UE07A_bitrev_c.obj)
+  2000910A 00000002 .data   sep	(UE07A_bitrev_c.obj)
+#>2000910C          __END_DATA (linker command file)
+#>2000910C          __START_SDATA (linker command file)
+#>2000910C          __END_SDATA (linker command file)
+#>2000910C          ___DATA_END (linker command file)
+#>2000910C          __SDA_BASE (linker command file)
+
+# .bss
+#>2000910C          ___BSS_START (linker command file)
+#>2000910C          __START_SBSS (linker command file)
+#>2000910C          __END_SBSS (linker command file)
+#>2000910C          __START_BSS (linker command file)
+  2000910C 00000004 .bss    __global_destructor_chain	(librt.a cf_staticinitia)
+#>20009110          __END_BSS (linker command file)
+#>20009110          ___BSS_END (linker command file)
+
+# .custom
+#>20009110          ___HEAP_START (linker command file)
+#>20009110          ___heap_addr (linker command file)
+#>2000A110          ___HEAP_END (linker command file)
+#>2000A110          ___SP_END (linker command file)
+#>2000B110          ___SP_INIT (linker command file)
+#>20000000          ___VECTOR_RAM (linker command file)
+#>2000B110          __SP_INIT (linker command file)
+#>2000A110          ___mem_limit (linker command file)
+#>00000010          ___stack_safety (linker command file)
+#>200025A8          _romp_at (linker command file)
+
+# .romp
+#>200025A8          __S_romp (linker command file)
+
+
+# Memory map:
+  v_addr   p_addr   size     name
+  20000000 20000000 00000000 .vectorram vectorram
+  20000500 20000500 00000000 .code      code
+  20000500 20000500 00000400 .vectors   code
+  20000900 20000900 00001C9C .text      code
+  20009100 20009100 00000000 .userram   userram
+  20009100 2000259C 0000000C .data      userram
+  2000910C 2000910C 00000004 .bss       userram
+  20009110 20009110 00000000 .custom    userram
+  20009110 200025A8 00000018 .romp      userram
+
+# Link start time: Thu Nov 29 23:41:47 2018
+# Link end time: Thu Nov 29 23:41:47 2018

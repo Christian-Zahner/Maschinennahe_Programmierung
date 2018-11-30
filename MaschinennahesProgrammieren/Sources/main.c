@@ -151,12 +151,12 @@ void main(void)
   
   	IntroUe07A();
   	
-  	printf("\r\nZahl vorher  = 0x%08lX und als Integer = %d\r\nBitmuster: ",vorher, vorher);
+  	printf("\r\nZahl vorher  = 0x%08lX und als Integer = %lu\r\nBitmuster: ",vorher, vorher);
   	printbit(vorher);
   	
-	nachher = bitrevUp(vorher);
+	nachher = bitrevUp(vorher, nachher);
 	
-	printf("\r\nZahl nachher = 0x%08lX und als Integer = %d\r\nBitmuster: ",nachher, nachher);
+	printf("\r\nZahl nachher = 0x%08lX und als Integer = %lu\r\nBitmuster: ",nachher, nachher);
 	printbit(nachher);
 	
   	outro();

@@ -14,7 +14,7 @@
 #ifndef UE07A_BITREV_H_
 #define UE07A_BITREV_H_
 
-unsigned long bitrevUp(unsigned long quelle);
+unsigned long bitrevUp(unsigned long quelle, unsigned long ziel);
 void printbit(unsigned long zahl);
 void IntroUe07A();
 
