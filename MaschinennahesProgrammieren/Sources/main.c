@@ -44,6 +44,7 @@
 #include "UE07_Trap.h"
 #include "UE07A_Bitrev.h"
 #include "UE08_Liste.h"
+#include "HexDaten.h"
 
 // - Bitte darauf achten, dass am Coldfire-Serial Port ein  
 //   Terminal (Putty o.ä.) mit 19200kBaud angeschlossen ist.

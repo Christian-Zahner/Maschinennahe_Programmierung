@@ -19,6 +19,7 @@ C_SRCS_QUOTED += \
 "../Sources/UE08_liste.c" \
 "../Sources/console_io.c" \
 "../Sources/exceptions.c" \
+"../Sources/hexdaten.c" \
 "../Sources/main.c" \
 "../Sources/terminal_wrapper.c" \
 "../Sources/uart_support.c" \
@@ -37,6 +38,7 @@ C_SRCS += \
 ../Sources/UE08_liste.c \
 ../Sources/console_io.c \
 ../Sources/exceptions.c \
+../Sources/hexdaten.c \
 ../Sources/main.c \
 ../Sources/terminal_wrapper.c \
 ../Sources/uart_support.c \
@@ -55,6 +57,7 @@ OBJS += \
 ./Sources/UE08_liste_c.obj \
 ./Sources/console_io_c.obj \
 ./Sources/exceptions_c.obj \
+./Sources/hexdaten_c.obj \
 ./Sources/main_c.obj \
 ./Sources/terminal_wrapper_c.obj \
 ./Sources/uart_support_c.obj \
@@ -73,6 +76,7 @@ OBJS_QUOTED += \
 "./Sources/UE08_liste_c.obj" \
 "./Sources/console_io_c.obj" \
 "./Sources/exceptions_c.obj" \
+"./Sources/hexdaten_c.obj" \
 "./Sources/main_c.obj" \
 "./Sources/terminal_wrapper_c.obj" \
 "./Sources/uart_support_c.obj" \
@@ -91,6 +95,7 @@ C_DEPS += \
 ./Sources/UE08_liste_c.d \
 ./Sources/console_io_c.d \
 ./Sources/exceptions_c.d \
+./Sources/hexdaten_c.d \
 ./Sources/main_c.d \
 ./Sources/terminal_wrapper_c.d \
 ./Sources/uart_support_c.d \
@@ -109,6 +114,7 @@ OBJS_OS_FORMAT += \
 ./Sources/UE08_liste_c.obj \
 ./Sources/console_io_c.obj \
 ./Sources/exceptions_c.obj \
+./Sources/hexdaten_c.obj \
 ./Sources/main_c.obj \
 ./Sources/terminal_wrapper_c.obj \
 ./Sources/uart_support_c.obj \
@@ -127,6 +133,7 @@ C_DEPS_QUOTED += \
 "./Sources/UE08_liste_c.d" \
 "./Sources/console_io_c.d" \
 "./Sources/exceptions_c.d" \
+"./Sources/hexdaten_c.d" \
 "./Sources/main_c.d" \
 "./Sources/terminal_wrapper_c.d" \
 "./Sources/uart_support_c.d" \
@@ -242,9 +249,17 @@ Sources/exceptions_c.obj: ../Sources/exceptions.c
 	@echo 'Finished building: $<'
 	@echo ' '
 
-Sources/main_c.obj: ../Sources/main.c
+Sources/hexdaten_c.obj: ../Sources/hexdaten.c
 	@echo 'Building file: $<'
 	@echo 'Executing target #14 $<'
+	@echo 'Invoking: ColdFire Compiler'
+	"$(CF_ToolsDirEnv)/mwccmcf" @@"Sources/hexdaten.args" -o "Sources/hexdaten_c.obj" "$<" -MD -gccdep
+	@echo 'Finished building: $<'
+	@echo ' '
+
+Sources/main_c.obj: ../Sources/main.c
+	@echo 'Building file: $<'
+	@echo 'Executing target #15 $<'
 	@echo 'Invoking: ColdFire Compiler'
 	"$(CF_ToolsDirEnv)/mwccmcf" @@"Sources/main.args" -o "Sources/main_c.obj" "$<" -MD -gccdep
 	@echo 'Finished building: $<'
@@ -252,7 +267,7 @@ Sources/main_c.obj: ../Sources/main.c
 
 Sources/terminal_wrapper_c.obj: ../Sources/terminal_wrapper.c
 	@echo 'Building file: $<'
-	@echo 'Executing target #15 $<'
+	@echo 'Executing target #16 $<'
 	@echo 'Invoking: ColdFire Compiler'
 	"$(CF_ToolsDirEnv)/mwccmcf" @@"Sources/terminal_wrapper.args" -o "Sources/terminal_wrapper_c.obj" "$<" -MD -gccdep
 	@echo 'Finished building: $<'
@@ -260,7 +275,7 @@ Sources/terminal_wrapper_c.obj: ../Sources/terminal_wrapper.c
 
 Sources/uart_support_c.obj: ../Sources/uart_support.c
 	@echo 'Building file: $<'
-	@echo 'Executing target #16 $<'
+	@echo 'Executing target #17 $<'
 	@echo 'Invoking: ColdFire Compiler'
 	"$(CF_ToolsDirEnv)/mwccmcf" @@"Sources/uart_support.args" -o "Sources/uart_support_c.obj" "$<" -MD -gccdep
 	@echo 'Finished building: $<'

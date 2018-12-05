@@ -4,6 +4,7 @@
 "./Sources/uart_support_c.obj"
 "./Sources/terminal_wrapper_c.obj"
 "./Sources/main_c.obj"
+"./Sources/hexdaten_c.obj"
 "./Sources/exceptions_c.obj"
 "./Sources/console_io_c.obj"
 "./Sources/UE08_liste_c.obj"

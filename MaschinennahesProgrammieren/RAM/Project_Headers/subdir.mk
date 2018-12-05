@@ -37,7 +37,7 @@ C_DEPS_QUOTED += \
 # Each subdirectory must supply rules for building sources it contributes
 Project_Headers/Cpu_c.obj: ../Project_Headers/Cpu.c
 	@echo 'Building file: $<'
-	@echo 'Executing target #18 $<'
+	@echo 'Executing target #19 $<'
 	@echo 'Invoking: ColdFire Compiler'
 	"$(CF_ToolsDirEnv)/mwccmcf" @@"Project_Headers/Cpu.args" -o "Project_Headers/Cpu_c.obj" "$<" -MD -gccdep
 	@echo 'Finished building: $<'
@@ -50,7 +50,7 @@ Project_Headers/%.d: ../Project_Headers/%.c
 
 Project_Headers/UART0_c.obj: ../Project_Headers/UART0.c
 	@echo 'Building file: $<'
-	@echo 'Executing target #19 $<'
+	@echo 'Executing target #20 $<'
 	@echo 'Invoking: ColdFire Compiler'
 	"$(CF_ToolsDirEnv)/mwccmcf" @@"Project_Headers/UART0.args" -o "Project_Headers/UART0_c.obj" "$<" -MD -gccdep
 	@echo 'Finished building: $<'

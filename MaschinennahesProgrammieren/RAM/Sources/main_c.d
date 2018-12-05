@@ -70,4 +70,5 @@ Sources/main_c.obj: D:\Desktop\Studium\Semester3\MaschinennahesProgrammieren\Übu
 	D:\Desktop\Studium\Semester3\MaschinennahesProgrammieren\Übungen\MaschinennahesProgrammieren\Project_Headers\UE06_Illegal.h \
 	D:\Desktop\Studium\Semester3\MaschinennahesProgrammieren\Übungen\MaschinennahesProgrammieren\Project_Headers\UE07_Trap.h \
 	D:\Desktop\Studium\Semester3\MaschinennahesProgrammieren\Übungen\MaschinennahesProgrammieren\Project_Headers\UE07A_Bitrev.h \
-	D:\Desktop\Studium\Semester3\MaschinennahesProgrammieren\Übungen\MaschinennahesProgrammieren\Project_Headers\UE08_Liste.h 
+	D:\Desktop\Studium\Semester3\MaschinennahesProgrammieren\Übungen\MaschinennahesProgrammieren\Project_Headers\UE08_Liste.h \
+	D:\Desktop\Studium\Semester3\MaschinennahesProgrammieren\Übungen\MaschinennahesProgrammieren\Project_Headers\HexDaten.h 
