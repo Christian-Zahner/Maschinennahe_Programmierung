@@ -1,0 +1,17 @@
+/***********************************
+ * Headerfilename: UE09_LED.h      *
+ * Created on	 : Dec 11, 2018    *
+ * Author		 : Christian Zahner*
+ ***********************************/
+
+
+#ifndef UE09_LED_H_
+#define UE09_LED_H_
+
+int ledOnOff();
+void ledLatched();
+void ledCount();
+void ledInterrupt();
+void IntroUe09();
+
+#endif /* UE09_LED_H_ */

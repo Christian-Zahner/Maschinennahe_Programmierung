@@ -45,6 +45,7 @@
 #include "UE07A_Bitrev.h"
 #include "UE08_Liste.h"
 #include "HexDaten.h"
+#include "UE09_LED.h"
 
 // - Bitte darauf achten, dass am Coldfire-Serial Port ein  
 //   Terminal (Putty o.ä.) mit 19200kBaud angeschlossen ist.
@@ -150,7 +151,7 @@ void main(void)
 	
 	/**** Uebung 07a **************************************************************************/
   
-  	IntroUe07A();
+  	/*IntroUe07A();
   	
   	printf("\r\nZahl vorher  = 0x%08lX und als Integer = %lu\r\nBitmuster: ",vorher, vorher);
   	printbit(vorher);
@@ -160,7 +161,7 @@ void main(void)
 	printf("\r\nZahl nachher = 0x%08lX und als Integer = %lu\r\nBitmuster: ",nachher, nachher);
 	printbit(nachher);
 	
-  	outro();
+  	outro();*/
 	
 	/**** Uebung 08 **************************************************************************/
   
@@ -173,8 +174,31 @@ void main(void)
 	
 	/**** Uebung 09 **************************************************************************/
   
-	//led();
-  
+  	IntroUe09();
+  	
+  	//Uebung 09a
+  	
+  	IntroUe09A();
+  	
+	//ledOnOff();
+  	
+  	//Uebung 09b
+  	
+  	/*IntroUe09B();
+  	
+  	ledLatched();*/
+  	
+  	//Uebung 09c
+  	
+  	/*IntroUe09C();
+  	
+  	ledCount();*/
+  	
+  	//Uebung 09a
+  	
+  	/*IntroUe09D();
+  	
+  	ledInterrupt();*/
 	
 	/**** Uebung 10 **************************************************************************/
   
