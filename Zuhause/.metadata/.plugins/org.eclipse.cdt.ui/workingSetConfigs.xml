@@ -15,4 +15,7 @@
 <workingSet aggregate="true" id="1543998992910_13" label="Window Working Set" name="Aggregate for window 1543998992910"/>
 <workingSet aggregate="true" id="1544550323975_14" label="Window Working Set" name="Aggregate for window 1544550323975"/>
 <workingSet aggregate="true" id="1544563943243_15" label="Window Working Set" name="Aggregate for window 1544563943243"/>
+<workingSet aggregate="true" id="1544635123944_16" label="Window Working Set" name="Aggregate for window 1544635123944"/>
+<workingSet aggregate="true" id="1544803872231_17" label="Window Working Set" name="Aggregate for window 1544803872231"/>
+<workingSet aggregate="true" id="1544804600869_18" label="Window Working Set" name="Aggregate for window 1544804600869"/>
 </org.eclipse.cdt.ui.workingSetConfigurations>

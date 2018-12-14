@@ -178,15 +178,15 @@ void main(void)
   	
   	//Uebung 09a
   	
-  	IntroUe09A();
+  	/*IntroUe09A();
   	
-	//ledOnOff();
+	ledOnOff();*/
   	
   	//Uebung 09b
   	
-  	/*IntroUe09B();
+  	IntroUe09B();
   	
-  	ledLatched();*/
+  	ledLatched();
   	
   	//Uebung 09c
   	
@@ -224,4 +224,19 @@ void main(void)
   }
  
 }  /* END main */
+
+
+/*Donaudampfschifffahrtsgesellschaftskapitaensmuetzenabzeichen
+
+Das ist ein ganz unglaublich langer Textstring, der vom DMA-
+Controller in einem Zug ohne Zutun der CPU ausgegeben wird!!
+Wenn Sie es richtig gemacht haben, funktioniert's wunderbar.
+Und noch ein bisschen mehr Text, weil es gar so schoen geht.
+
+Der String kann so lang sein, wie er will: Er wird in einem
+Schwung per DMA ausgegeben, ohne das die CPU noch etwas tun
+muss.
+
+
+dma0 transfer done*/
 
