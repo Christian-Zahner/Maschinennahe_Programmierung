@@ -35,22 +35,22 @@
   20001360 00000082 .text   main	(main_c.obj)
   200013E2 00000206 .text   mcf_exception_handler	(exceptions_c.obj)
   200015E8 00000022 .text   asm_exception_handler	(exceptions_c.obj)
-  2000160A 00000086 .text   ledLatched	(UE09_led_c.obj)
-  20001690 00000050 .text   IntroUe09	(UE09_led_c.obj)
-  200016E0 00000026 .text   IntroUe09B	(UE09_led_c.obj)
-  20001706 00000018 .text   test	(Intro_c.obj)
-  2000171E 0000000C .text   _ewl_exit	(librt.a abort_exit.o   )
-  2000172A 0000001C .text   __call_static_initializers	(librt.a cf_staticinitia)
-  20001746 0000002C .text   __destroy_global_chain	(librt.a cf_staticinitia)
-  20001774 00000014 .rodata @50	(main_c.obj)
-  20001788 00000014 .rodata @52	(main_c.obj)
-  2000179C 0000004C .rodata @56	(UE09_led_c.obj)
-  200017E8 0000003B .rodata @57	(UE09_led_c.obj)
-  20001823 00000042 .rodata @58	(UE09_led_c.obj)
-  20001865 00000049 .rodata @59	(UE09_led_c.obj)
-  200018AE 00000021 .rodata @60	(UE09_led_c.obj)
-  200018CF 0000004B .rodata @84	(UE09_led_c.obj)
-  2000191A 00000016 .rodata @56	(Intro_c.obj)
+  2000160A 00000084 .text   ledCount	(UE09_led_c.obj)
+  2000168E 00000050 .text   IntroUe09	(UE09_led_c.obj)
+  200016DE 00000026 .text   IntroUe09C	(UE09_led_c.obj)
+  20001704 00000018 .text   test	(Intro_c.obj)
+  2000171C 0000000C .text   _ewl_exit	(librt.a abort_exit.o   )
+  20001728 0000001C .text   __call_static_initializers	(librt.a cf_staticinitia)
+  20001744 0000002C .text   __destroy_global_chain	(librt.a cf_staticinitia)
+  20001770 00000014 .rodata @50	(main_c.obj)
+  20001784 00000014 .rodata @52	(main_c.obj)
+  20001798 0000004C .rodata @64	(UE09_led_c.obj)
+  200017E4 0000003B .rodata @65	(UE09_led_c.obj)
+  2000181F 00000042 .rodata @66	(UE09_led_c.obj)
+  20001861 00000049 .rodata @67	(UE09_led_c.obj)
+  200018AA 00000021 .rodata @68	(UE09_led_c.obj)
+  200018CB 0000004C .rodata @101	(UE09_led_c.obj)
+  20001917 00000016 .rodata @56	(Intro_c.obj)
 #>20001930          ___ROM_AT (linker command file)
 #>20001930          ___DATA_ROM (linker command file)
 
@@ -108,5 +108,5 @@
   2000910C 2000910C 00000000 .custom    userram
   2000910C 20001938 00000018 .romp      userram
 
-# Link start time: Fri Dec 14 19:58:54 2018
-# Link end time: Fri Dec 14 19:58:54 2018
+# Link start time: Mon Dec 17 19:21:25 2018
+# Link end time: Mon Dec 17 19:21:25 2018

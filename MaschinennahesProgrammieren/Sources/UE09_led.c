@@ -191,21 +191,20 @@
 	      (15.6.1 Port Output Data Registers (PORTn))
 	     */
 	
-			 // andi.w #0xF0F0, MNP_GPIO_PNQPAR  geht nicht, deshalb folgender Code
-			 move.w   PNQPAR,d0 		 //NQ5 and NQ1 löschen für GPIO Funktion
-			 and.l    #0xF0F0, d0
-			 move.w   d0, PNQPAR
+		// andi.w #0xF0F0, MNP_GPIO_PNQPAR  geht nicht, deshalb folgender Code
+		move.w   PNQPAR,d0 		 //NQ5 and NQ1 löschen für GPIO Funktion
+		and.l    #0xF0F0, d0
+		move.w   d0, PNQPAR
 					 
-			 // andi.b #0xDD, MNP_GPIO_DDRNQ  geht nicht, deshalb folgender Code
-			 move.b   DDRNQ, d0			 //NQ5 and NQ1 löschen für input Funktion
-			 andi.l   #0xDD,d0
-			 move.b   d0, DDRNQ
+		// andi.b #0xDD, MNP_GPIO_DDRNQ  geht nicht, deshalb folgender Code
+		move.b   DDRNQ, d0			 //NQ5 and NQ1 löschen für input Funktion
+		andi.l   #0xDD,d0
+		move.b   d0, DDRNQ
 						
-	
-			 // andi.b #0xDD, MNP_GPIO_CLRNQ  geht nicht, deshalb folgender Code
-			 move.b   CLRNQ,d0           //NQ5+NQ1 löschen
-			 andi.l   #0xDD,d0	
-			 move.b   d0, CLRNQ
+		// andi.b #0xDD, MNP_GPIO_CLRNQ  geht nicht, deshalb folgender Code
+		move.b   CLRNQ,d0           //NQ5+NQ1 löschen
+		andi.l   #0xDD,d0	
+		move.b   d0, CLRNQ
 
 
 		 /* Enable LEDs as digital outputs ==================================== */
@@ -219,15 +218,16 @@
 		  */
 		  	  	
 		  	  	
-		 clr.b    PTCPAR      			//GPIO Funktion (=0)
+		clr.b    PTCPAR      		//GPIO Funktion (=0)
 
-		 move.b   #0xf, d0              //output Funktion (=1)
-		 move.b   d0, DDRTC
+		move.b   #0xf, d0           //output Funktion (=1)
+		move.b   d0, DDRTC
 		  	  	
-		 clr.b    CLRTC        			//LEDS OFF, siehe Figure 15-3
+		clr.b    CLRTC        		//LEDS OFF, siehe Figure 15-3
 
 	 loop:
 
+	 	 // Schleife so lange Taste nicht gedrückt
 
 	     wait_for_pressed:
 
@@ -238,17 +238,19 @@
 	        
 
 	     wait_for_released:
+	     
+	     // Schleife so lange Taste gedrückt
 
 	      clr.l    d0                         
 	      move.b   PINDATANQ, d0        // Poll the switches via SETNQ
 	      andi.l   #PORTNQ5, d0   		// Check if NQ5 is set (SW1 released)
 	      beq      wait_for_released
 
+	      // LED ein
 
-	      move.b   PORTTC, d0
-	      bchg     #PORTTC0, d0   		// Toggle bit
-	      move.b   d0, PORTTC
-	             
+	      move.b   PORTTC, d0			// Inhalt in d0
+	      bchg     #PORTTC0, d0   		// Toggle bit 
+	      move.b   d0, PORTTC    		// PORTTC Lampe ein
 	             
 	      bra      loop	
 
@@ -316,22 +318,126 @@
 	
 			 clr.l    d0                         
 			 move.b   PINDATANQ, d0         // Poll the switches via SETNQ
-			 andi.l   #PORTNQ5, d0  		 // Check if NQ5 is unset (SW1 pressed)
+			 andi.l   #PORTNQ5, d0  		// Check if NQ5 is unset (SW1 pressed)
 			 bne      wait_for_pressed
 					
 	
 			wait_for_released:
 	
 			 clr.l    d0                         
-			 move.b   PINDATANQ, d0        // Poll the switches via SETNQ
+			 move.b   PINDATANQ, d0        	// Poll the switches via SETNQ
 			 andi.l   #PORTNQ5, d0   		// Check if NQ5 is set (SW1 released)
 			 beq      wait_for_released
 	
 	
-			 move.b   PORTTC, d0
-			 bchg     #PORTTC0, d0   		// Toggle bit
-			 move.b   d0, PORTTC
+			 move.b   PORTTC, d0			// Auslesen des "LED Registers"
+			 addq.l	  #1, d0	   			// erhöhe aktuellen Inhalt um 1
+			 move.b   d0, PORTTC			// Übertrage an "LED Register"
 									 
+			 bra      loop	
+	
+	
+		  }
+		  
+  }
+  
+  void ledCountPlusMinus(){
+	  
+	asm{
+			
+		/* MCF52259RM.pdf
+		- SW1 and SW2 are connected to PNQPAR5 and PNQPAR1 (Quad function pins!!)
+		- LED's 1-4 are connected to DDRTC0-DDRTC3
+		*/
+					
+		/* Enable Switches to be pollable ====================================== */
+		/* MCF52259RM.pdf
+		- Pin Assignment must be set to GPIO function 
+		  (15.6.5.3 Port NQ Pin Assignment Register (PNQPAR))
+		- Port Data Direction must be cleared for input function 
+		  (15.6.2 Port Data Direction Registers (DDRn))
+		- Output Data Register must be cleared 
+		  (15.6.1 Port Output Data Registers (PORTn))
+		*/
+	
+			// andi.w #0xF0F0, MNP_GPIO_PNQPAR  geht nicht, deshalb folgender Code
+			move.w   PNQPAR,d0 			//NQ5 and NQ1 löschen für GPIO Funktion
+			and.l    #0xF0F0, d0
+			move.w   d0, PNQPAR
+						 
+			// andi.b #0xDD, MNP_GPIO_DDRNQ  geht nicht, deshalb folgender Code
+			move.b   DDRNQ, d0				 //NQ5 and NQ1 löschen für input Funktion
+			andi.l   #0xDD,d0
+			move.b   d0, DDRNQ
+							
+			// andi.b #0xDD, MNP_GPIO_CLRNQ  geht nicht, deshalb folgender Code
+			move.b   CLRNQ,d0           	//NQ5+NQ1 löschen
+			andi.l   #0xDD,d0	
+			move.b   d0, CLRNQ
+	
+		/* Enable LEDs as digital outputs ==================================== */
+		/* MCF52259RM.pdf
+		- Port Data Direction must be set for output function 
+		  (15.6.2 Port Data Direction Registers (DDRn))
+		- Pin Assignment must be set to GPIO function 
+		  (15.6.5.1 Dual-Function Pin Assignment Registers)
+		- Output Data Register must be set/reset 
+		  (15.6.1 Port Output Data Registers (PORTn))
+		*/
+						
+						
+			clr.b    PTCPAR      			//GPIO Funktion (=0)
+	
+			move.b   #0xf, d0              //output Funktion (=1)
+			move.b   d0, DDRTC
+						
+			clr.b    CLRTC        		  //LEDS OFF, siehe Figure 15-3
+	
+		loop:
+	
+	
+			wait_for_pressed:
+	
+			 clr.l    d0                         
+			 move.b   PINDATANQ, d0         // Poll the switches via SETNQ
+			 andi.l   #PORTNQ5, d0  		// Check if NQ5 is unset (SW1 pressed)
+			 beq	  wait_for_released1
+			 
+			 clr.l    d1                         
+			 move.b   PINDATANQ, d1         // Poll the switches via SETNQ
+			 andi.l   #PORTNQ1, d1  		// Check if NQ5 is unset (SW1 pressed)
+			 beq	  wait_for_released2
+			 
+			 
+			 bra      wait_for_pressed
+					
+	
+			wait_for_released1:
+	
+			 clr.l    d0                         
+			 move.b   PINDATANQ, d0        	// Poll the switches via SETNQ
+			 andi.l   #PORTNQ5, d0   		// Check if NQ5 is set (SW1 released)
+			 beq      wait_for_released1
+	
+	
+			 move.b   PORTTC, d0			// Auslesen des "LED Registers"
+			 addq.l	  #1, d0	   			// erhöhe aktuellen Inhalt um 1
+			 move.b   d0, PORTTC			// Übertrage an "LED Register"
+									 
+			 bra      loop	
+			 
+			wait_for_released2:
+		
+			 clr.l    d1                         
+			 move.b   PINDATANQ, d1        	// Poll the switches via SETNQ
+			 andi.l   #PORTNQ1, d1   		// Check if NQ5 is set (SW1 released)
+			 beq      wait_for_released2
+		
+		
+			 move.b   PORTTC, d1			// Auslesen des "LED Registers"
+			 subq.l	  #1, d1	   			// erhöhe aktuellen Inhalt um 1
+			 move.b   d1, PORTTC			// Übertrage an "LED Register"
+										 
 			 bra      loop	
 	
 	

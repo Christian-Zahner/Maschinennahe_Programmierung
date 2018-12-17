@@ -11,6 +11,7 @@
 void ledOnOff();
 void ledLatched();
 void ledCount();
+void ledCountPlusMinus();
 void ledInterrupt();
 void IntroUe09();
 void IntroUe09A();

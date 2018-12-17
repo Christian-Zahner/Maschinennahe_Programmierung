@@ -184,15 +184,17 @@ void main(void)
   	
   	//Uebung 09b
   	
-  	IntroUe09B();
+  	/*IntroUe09B();
   	
-  	ledLatched();
+  	ledLatched();*/
   	
   	//Uebung 09c
   	
-  	/*IntroUe09C();
+  	IntroUe09C();
   	
-  	ledCount();*/
+  	ledCount();
+  	
+  	//ledCountPlusMinus();
   	
   	//Uebung 09a
   	
