@@ -60,7 +60,7 @@ void main(void)
   char strg2[20] 	= "leer";
   int zahl			= 4783;
   
-  unsigned long vorher  = 0x00000101;
+  unsigned long vorher  = 0x00000010;
   unsigned long nachher = 0x00000000;
 
 
@@ -192,9 +192,9 @@ void main(void)
   	
   	IntroUe09C();
   	
-  	ledCount();
+  	//ledCount();
   	
-  	//ledCountPlusMinus();
+  	ledCountPlusMinus();
   	
   	//Uebung 09a
   	

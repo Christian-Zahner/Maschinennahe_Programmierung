@@ -72,6 +72,14 @@
   #define PORTTC3  				 0x00000008
 
 
+   /* Defines for interrupt */
+
+  /* Definitionen für MCF_Edge Post */
+  #define MNP_INTC0_IMRL       0x40000C0C  // Interrupt Mask Register 
+  #define MNP_EPORT_EPPAR      0x40130000  // Edge control register
+  #define MNP_EPORT_EPIER      0x40130003  // Edge Port Interrupt Enable Reg
+  #define MNP_EPORT_EPFR       0x40130006  // Edge Port Flag Register 
+
   void ledOnOff(){
 
   asm 
@@ -309,7 +317,7 @@
 			move.b   #0xf, d0              //output Funktion (=1)
 			move.b   d0, DDRTC
 						
-			clr.b    CLRTC        		  //LEDS OFF, siehe Figure 15-3
+			clr.b    CLRTC        		   //LEDS OFF, siehe Figure 15-3
 	
 		loop:
 	
@@ -321,13 +329,26 @@
 			 andi.l   #PORTNQ5, d0  		// Check if NQ5 is unset (SW1 pressed)
 			 bne      wait_for_pressed
 					
-	
+			 clr.l    d0
+			 
+			 wait1:                         // loop to eliminate switch bouncing
+			   addq.l   #1, d0              // (s.b. = deutsch: "Schalterprellen")
+			   tst.w    d0
+			   bne      wait1
+			 
 			wait_for_released:
 	
 			 clr.l    d0                         
 			 move.b   PINDATANQ, d0        	// Poll the switches via SETNQ
 			 andi.l   #PORTNQ5, d0   		// Check if NQ5 is set (SW1 released)
 			 beq      wait_for_released
+			 
+		     clr.l    d0
+		     
+		     wait2:                         // loop to eliminate switch bouncing
+		       addq.l   #1, d0         		// (s.b. = deutsch: "Schalterprellen")
+		       tst.w    d0
+		       bne      wait2
 	
 	
 			 move.b   PORTTC, d0			// Auslesen des "LED Registers"
@@ -403,12 +424,18 @@
 			 andi.l   #PORTNQ5, d0  		// Check if NQ5 is unset (SW1 pressed)
 			 beq	  wait_for_released1
 			 
-			 clr.l    d1                         
-			 move.b   PINDATANQ, d1         // Poll the switches via SETNQ
-			 andi.l   #PORTNQ1, d1  		// Check if NQ5 is unset (SW1 pressed)
+			 clr.l    d0                         
+			 move.b   PINDATANQ, d0         // Poll the switches via SETNQ
+			 andi.l   #PORTNQ1, d0  		// Check if NQ5 is unset (SW1 pressed)
 			 beq	  wait_for_released2
 			 
-			 
+		     clr.l    d0
+		     
+		    wait1:                          // loop to eliminate switch bouncing
+		      addq.l   #1, d0               // (s.b. = deutsch: "Schalterprellen")
+		      tst.w    d0
+		      bne      wait1 
+			
 			 bra      wait_for_pressed
 					
 	
@@ -419,6 +446,13 @@
 			 andi.l   #PORTNQ5, d0   		// Check if NQ5 is set (SW1 released)
 			 beq      wait_for_released1
 	
+
+		     clr.l    d0
+		     
+		     wait2:                         // loop to eliminate switch bouncing
+		      addq.l   #1, d0         		// (s.b. = deutsch: "Schalterprellen")
+		      tst.w    d0
+		      bne      wait2
 	
 			 move.b   PORTTC, d0			// Auslesen des "LED Registers"
 			 addq.l	  #1, d0	   			// erhöhe aktuellen Inhalt um 1
@@ -428,15 +462,22 @@
 			 
 			wait_for_released2:
 		
-			 clr.l    d1                         
-			 move.b   PINDATANQ, d1        	// Poll the switches via SETNQ
-			 andi.l   #PORTNQ1, d1   		// Check if NQ5 is set (SW1 released)
+			 clr.l    d0                         
+			 move.b   PINDATANQ, d0        	// Poll the switches via SETNQ
+			 andi.l   #PORTNQ1, d0   		// Check if NQ5 is set (SW1 released)
 			 beq      wait_for_released2
 		
+
+		     clr.l    d0
+		     
+		     wait3:                         // loop to eliminate switch bouncing
+		       addq.l   #1, d0         		// (s.b. = deutsch: "Schalterprellen")
+		       tst.w    d0
+		       bne      wait3
 		
-			 move.b   PORTTC, d1			// Auslesen des "LED Registers"
-			 subq.l	  #1, d1	   			// erhöhe aktuellen Inhalt um 1
-			 move.b   d1, PORTTC			// Übertrage an "LED Register"
+			 move.b   PORTTC, d0			// Auslesen des "LED Registers"
+			 subq.l	  #1, d0	   			// erhöhe aktuellen Inhalt um 1
+			 move.b   d0, PORTTC			// Übertrage an "LED Register"
 										 
 			 bra      loop	
 	
@@ -446,6 +487,124 @@
   }
   
   void ledInterrupt(){
+	  
+	  asm 
+	      {
+	           /* MCF52259RM.pdf
+	           - SW1 and SW2 verbunden mit PNQPAR5 and PNQPAR1 (Quad function pins!!)
+	           - LED's 1-4 verbunden mit DDRTC0-DDRTC3
+	           */
+	              
+	          /* LEDs als digitale Ausgabe konfigurieren ==========================        bekannt         */
+	           /* MCF52259RM.pdf
+	           - Port Data Direction auf output Funktion setzen 
+	             (15.6.2 Port Data Direction Registers (DDRn))
+	           - Pin Assignment auf GPIO Funktion setzen
+	             (15.6.5.1 Dual-Function Pin Assignment Registers)
+	          - Output Data Register zurücksetzen 
+	            (15.6.1 Port Output Data Registers (PORTn))
+	           */
+	           
+	           clr.b    PTCPAR       		 //GPIO Funktion (=0)
+	           move.b   #0xf, d0             //output Funktion (=1)
+	           move.b   d0, DDRTC
+	           clr.b    CLRTC        		//LEDS OFF, siehe Figure 15-3
+	           /* LEDs als digitale Ausgabe konfigurieren ==========================       bekannt (Ende) */
+
+	           
+	           
+	          /* Taster als digitale Eingabe konfigurieren  ============================= */
+	          /* MCF52259RM.pdf
+	           - Pin Assignment auf IRQ function (primary function) 
+	             (15.6.5.3 Port NQ Pin Assignment Register (PNQPAR))
+	           - Port Data Direction Löschen für input function 
+	             (15.6.2 Port Data Direction Registers (DDRn))
+	           - Output Data Register löschen 
+	             (15.6.1 Port Output Data Registers (PORTn))
+	          */
+	           
+	          
+	        // Achtung: Andere Funktion für NQ1 und NQ5 (primary function (=IRQ), 01 statt 00)
+	           move.w   PNQPAR,d0    		 // NQ5 und NQ1 auf IRQ Funktion (01)
+	           and.l 	#0xF0F0, d0
+	           or.l 	 #0x0404, d0
+	           move.w   d0, PNQPAR
+	        
+	           move.b   DDRNQ, d0  			 //NQ5 and NQ1 löschen für input Funktion
+	           andi.l   #0xDD,d0
+	           move.b   d0, DDRNQ
+	           
+	           move.b   CLRNQ,d0    		//NQ5+NQ1 löschen
+	           andi.l   #0xDD,d0 
+	           move.b   d0, CLRNQ
+
+	        // Einhängen der Unterbrechungsantwortprogramme (interrupt service routines)
+	        //   (IRQ5=sw1 / IRQ1=sw2) 
+	          lea     int_handler_IRQ1, a1
+	          //########Hier fehlt was         // IRQ1 Vector
+	          lea     int_handler_IRQ5, a1
+	           //########Hier fehlt was        // IRQ5 Vector 
+
+	           
+	        // Einstellen rising/falling edge detection, 
+	        // Einstellen auf falling edge active (MCF52259RM 17.4.1)
+	           //########Hier fehlt was         
+	        
+	        // Enable EPORT Interrupts (MCF52259RM 17.4.3)              // ENABLE
+	           move.b   MNP_EPORT_EPIER, d1
+	           or.l  	#0x00000022, d1       // 0x20=IRQ5, 0x2=IRQ1 
+	           move.b   d1, MNP_EPORT_EPIER
+	        
+	        // enable IRQ1+5  (MCF52259RM 16.3.2)                       // ÄUSSERE MASKE
+	           move.l   MNP_INTC0_IMRL, d1
+	           and.l 	#(~0x00000022), d1    //  0x20=IRQ5, 0x2=IRQ1 
+	           move.l   d1, MNP_INTC0_IMRL
+	        
+	        // Interrupts im Statusregister freigeben (CFPRM 1.5.1)     // INNERE MASKE
+	           //########Hier fehlt was         
+
+
+	          
+	      loop:                       // Das ist unser Leerlaufprozess
+	        bra       loop  
+	        
+
+	      //////////////////////////////////////////////////////////////////////////////
+	      int_handler_IRQ5:      
+	          move.l   d0, -(sp)     // WICHTIG!  Alle benutzten Register retten
+	          move.l   d1, -(sp)
+	        
+	        LED1_ON:
+	        //########Hier fehlt was               // LED einschalten 
+
+	        // Interupt zurücksetzen (MCF52259 17.4.6)
+	        move.b   #0x20,d0                    // Schreiben von 1 löscht die Bits!
+	        move.b   d0, MNP_EPORT_EPFR
+	        
+	        move.l   (sp)+,d1      // WICHTIG!  Alle benutzten Register restaurieren
+	        move.l   (sp)+,d0  
+	        rte 
+	          
+	          
+	      //////////////////////////////////////////////////////////////////////////////    
+	      int_handler_IRQ1:      
+	          move.l   d0, -(sp)
+	          move.l   d1, -(sp)
+	          
+	        LED1_OFF:  
+	        //########Hier fehlt was         // LED ausschalten
+	           
+	        // Interupt zurücksetzen (MCF52259 17.4.6)
+	        move.b   #0x02,d0                    // Schreiben von 1 löscht die Bits! 
+	        move.b   d0, MNP_EPORT_EPFR
+	        
+	        move.l   (sp)+,d1
+	        move.l   (sp)+,d0  
+	        rte
+	      //////////////////////////////////////////////////////////////////////////////    
+
+
+	      }
 	  
   }
 
