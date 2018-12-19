@@ -35,24 +35,24 @@
   20001360 00000074 .text   main	(main_c.obj)
   200013D4 00000206 .text   mcf_exception_handler	(exceptions_c.obj)
   200015DA 00000022 .text   asm_exception_handler	(exceptions_c.obj)
-  200015FC 000000CE .text   ledCountPlusMinus	(UE09_led_c.obj)
-  200016CA 00000050 .text   IntroUe09	(UE09_led_c.obj)
-  2000171A 00000026 .text   IntroUe09C	(UE09_led_c.obj)
-  20001740 00000018 .text   test	(Intro_c.obj)
-  20001758 0000000C .text   _ewl_exit	(librt.a abort_exit.o   )
-  20001764 0000001C .text   __call_static_initializers	(librt.a cf_staticinitia)
-  20001780 0000002C .text   __destroy_global_chain	(librt.a cf_staticinitia)
-  200017AC 00000014 .rodata @50	(main_c.obj)
-  200017C0 00000014 .rodata @52	(main_c.obj)
-  200017D4 0000004C .rodata @74	(UE09_led_c.obj)
-  20001820 0000003B .rodata @75	(UE09_led_c.obj)
-  2000185B 00000042 .rodata @76	(UE09_led_c.obj)
-  2000189D 00000049 .rodata @77	(UE09_led_c.obj)
-  200018E6 00000021 .rodata @78	(UE09_led_c.obj)
-  20001907 0000004C .rodata @111	(UE09_led_c.obj)
-  20001953 00000016 .rodata @56	(Intro_c.obj)
-#>2000196C          ___ROM_AT (linker command file)
-#>2000196C          ___DATA_ROM (linker command file)
+  200015FC 000000F0 .text   echo	(UE11_echo_c.obj)
+  200016EC 00000050 .text   IntroUe11	(UE11_echo_c.obj)
+  2000173C 00000018 .text   outro	(UE05_mymemcopy_c.obj)
+  20001754 00000018 .text   test	(Intro_c.obj)
+  2000176C 0000000C .text   _ewl_exit	(librt.a abort_exit.o   )
+  20001778 0000001C .text   __call_static_initializers	(librt.a cf_staticinitia)
+  20001794 0000002C .text   __destroy_global_chain	(librt.a cf_staticinitia)
+  200017C0 00000014 .rodata @50	(main_c.obj)
+  200017D4 00000014 .rodata @52	(main_c.obj)
+  200017E8 0000004C .rodata @35	(UE11_echo_c.obj)
+  20001834 0000004A .rodata @36	(UE11_echo_c.obj)
+  2000187E 00000048 .rodata @37	(UE11_echo_c.obj)
+  200018C6 00000037 .rodata @38	(UE11_echo_c.obj)
+  200018FD 0000004D .rodata @39	(UE11_echo_c.obj)
+  2000194A 0000004F .rodata @67	(UE05_mymemcopy_c.obj)
+  20001999 00000016 .rodata @56	(Intro_c.obj)
+#>200019B0          ___ROM_AT (linker command file)
+#>200019B0          ___DATA_ROM (linker command file)
 
 # .data
 #>20009100          ___DATA_RAM (linker command file)
@@ -90,10 +90,10 @@
 #>2000B10C          __SP_INIT (linker command file)
 #>2000A10C          ___mem_limit (linker command file)
 #>00000010          ___stack_safety (linker command file)
-#>20001974          _romp_at (linker command file)
+#>200019B8          _romp_at (linker command file)
 
 # .romp
-#>20001974          __S_romp (linker command file)
+#>200019B8          __S_romp (linker command file)
 
 
 # Memory map:
@@ -101,12 +101,12 @@
   20000000 20000000 00000000 .vectorram vectorram
   20000500 20000500 00000000 .code      code
   20000500 20000500 00000400 .vectors   code
-  20000900 20000900 0000106C .text      code
+  20000900 20000900 000010B0 .text      code
   20009100 20009100 00000000 .userram   userram
-  20009100 2000196C 00000008 .data      userram
+  20009100 200019B0 00000008 .data      userram
   20009108 20009108 00000004 .bss       userram
   2000910C 2000910C 00000000 .custom    userram
-  2000910C 20001974 00000018 .romp      userram
+  2000910C 200019B8 00000018 .romp      userram
 
-# Link start time: Wed Dec 19 09:37:12 2018
-# Link end time: Wed Dec 19 09:37:12 2018
+# Link start time: Wed Dec 19 18:56:47 2018
+# Link end time: Wed Dec 19 18:56:47 2018

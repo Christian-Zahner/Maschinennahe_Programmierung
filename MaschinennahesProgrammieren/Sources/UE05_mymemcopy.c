@@ -51,7 +51,8 @@
 				bne     Loop			//wenn nicht gleich Zero 
 										//sprung auf Marke Loop
 		
-				move.l  8(a6),a0		//Ziel nach a0 rückgabewert
+				move.l  8(a6),a0		//Ziel nach a0 (rückgabewert)
+				
 				movem.l (sp),d2/a2-a3	//Register holen vom Stack	
 				adda 	#12,sp			//Speicherfreigeben von Register auf SP
 				unlk 	a6				//FP vom Stack nehmen

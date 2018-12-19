@@ -175,7 +175,7 @@ void main(void)
 	
 	/**** Uebung 09 **************************************************************************/
   
-  	IntroUe09();
+  	/*IntroUe09();
   	
   	//Uebung 09a
   	
@@ -191,11 +191,11 @@ void main(void)
   	
   	//Uebung 09c
   	
-  	IntroUe09C();
+  	/*IntroUe09C();
   	
   	//ledCount();
   	
-  	ledCountPlusMinus();
+  	ledCountPlusMinus();*/
   	
   	//Uebung 09a
   	
@@ -210,11 +210,11 @@ void main(void)
 	
 	/**** Uebung 11 **************************************************************************/
   
-  	/*IntroUe11();
+  	IntroUe11();
   	
-	//echo();
+	echo();
   
-	outro();*/
+	outro();
   	
 	/**** Uebung 12 **************************************************************************/
 

@@ -540,15 +540,18 @@
 
 	        // Einhängen der Unterbrechungsantwortprogramme (interrupt service routines)
 	        //   (IRQ5=sw1 / IRQ1=sw2) 
-	          lea     int_handler_IRQ1, a1
-	          //########Hier fehlt was         // IRQ1 Vector
-	          lea     int_handler_IRQ5, a1
-	           //########Hier fehlt was        // IRQ5 Vector 
+	           lea     int_handler_IRQ1, a1
+	           move.l  a1, 0x20000100 + 1*4 // IRQ1 Vector
+	                   
+	           lea     int_handler_IRQ5, a1
+	           move.l  a1, 0x20000100 + 5*4 // IRQ5 Vector  
 
 	           
 	        // Einstellen rising/falling edge detection, 
 	        // Einstellen auf falling edge active (MCF52259RM 17.4.1)
-	           //########Hier fehlt was         
+	           move.w	MNP_EPORT_EPPAR, d1
+	           move.w 	#0x0808, d1            // bits sensitive to falling edge
+	           move.w	d1, MNP_EPORT_EPPAR	        
 	        
 	        // Enable EPORT Interrupts (MCF52259RM 17.4.3)              // ENABLE
 	           move.b   MNP_EPORT_EPIER, d1
@@ -561,27 +564,30 @@
 	           move.l   d1, MNP_INTC0_IMRL
 	        
 	        // Interrupts im Statusregister freigeben (CFPRM 1.5.1)     // INNERE MASKE
-	           //########Hier fehlt was         
+	           move.w	sr,d1
+	           andi.l   #~0x00000700,d1
+	           move.w	d1,sr         
 
 
 	          
-	      loop:                       // Das ist unser Leerlaufprozess
+	      loop:                       	  // Das ist unser Leerlaufprozess
 	        bra       loop  
 	        
 
 	      //////////////////////////////////////////////////////////////////////////////
 	      int_handler_IRQ5:      
-	          move.l   d0, -(sp)     // WICHTIG!  Alle benutzten Register retten
+	          move.l   d0, -(sp)     	  // WICHTIG!  Alle benutzten Register retten
 	          move.l   d1, -(sp)
 	        
 	        LED1_ON:
-	        //########Hier fehlt was               // LED einschalten 
+	        move.l  #PORTTC0,d1
+	        move.b	d1, SETTC			  // LED einschalten 
 
 	        // Interupt zurücksetzen (MCF52259 17.4.6)
-	        move.b   #0x20,d0                    // Schreiben von 1 löscht die Bits!
+	        move.b   #0x20,d0             // Schreiben von 1 löscht die Bits!
 	        move.b   d0, MNP_EPORT_EPFR
 	        
-	        move.l   (sp)+,d1      // WICHTIG!  Alle benutzten Register restaurieren
+	        move.l   (sp)+,d1      		 // WICHTIG!  Alle benutzten Register restaurieren
 	        move.l   (sp)+,d0  
 	        rte 
 	          
@@ -592,10 +598,11 @@
 	          move.l   d1, -(sp)
 	          
 	        LED1_OFF:  
-	        //########Hier fehlt was         // LED ausschalten
+	        move.l  #~(PORTTC0),d1
+	        move.b	d1, CLRTC			 // LED ausschalten
 	           
 	        // Interupt zurücksetzen (MCF52259 17.4.6)
-	        move.b   #0x02,d0                    // Schreiben von 1 löscht die Bits! 
+	        move.b   #0x02,d0            // Schreiben von 1 löscht die Bits! 
 	        move.b   d0, MNP_EPORT_EPFR
 	        
 	        move.l   (sp)+,d1
