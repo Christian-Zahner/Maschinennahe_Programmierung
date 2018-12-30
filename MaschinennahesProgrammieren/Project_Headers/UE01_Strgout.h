@@ -17,6 +17,7 @@
 void strgout();
 void strgoutrev();
 void strgoutrevalt();
+void strgoutRevWithoutCount();
 void IntroUe01();
 void IntroUe02();
 

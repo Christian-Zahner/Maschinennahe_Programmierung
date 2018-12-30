@@ -33,6 +33,7 @@
   					move.b	d3,-(sp) // Inhalt von d2 auf Stack
   									 // -(sp) pre decrement reservier von Speicher
   									 // für Char aus d2
+  					
   					jsr TERM_Write	 // jsr Jump Subroutine springt in Unterprogramm
   					adda.l #1,sp     // Stack Speicherplatzfreigeben
   					bra loop		 // Branch (Rücksprung) auf loop Marke
@@ -57,25 +58,25 @@
   					clr.l d3 	  // Register d1 löschen
   		
   		loop_cnt:
-  				    add.l #1, d3 // increment counter in d3 um 1
+  				    add.l #1, d3  // increment counter in d3 um 1
   				    tst.b (a2)+	  // test auf a2 null und  
   				    			  // (a2)+ Byteweise verschieben
   				    bne loop_cnt  // branch not equal
   					
   			        sub.l #1, d3  // Anzahl Zeichen im String ohne 0-Byte
-  			        sub.l #1, a2  // Zeiger um 1 zurückgesetzt (jetzt auf 0-Byte)
+  			        sub.l #1, a2  // Zeiger um 1 zurückgesetzt (jetzt auf \0 am String Ende)
 
   			        bra loop_end  // Sprung ans Schleifenende
   			                      // => auch leere Strings werden richtig behandelt
   			                      // => Schleife muss von (AnzahlZeichen - 1) downto 0 laufen
   			        
   		loop_out:	
-  					move.b -(a2),-(sp)
-  					jsr TERM_Write
-  					adda.l #1, sp
+					move.b -(a2),-(sp) // -(a2) da wir ja nich \0 Ende zeichen ausgeben wollen
+					jsr TERM_Write	   // Zeichen ausgeben
+					adda.l #1, sp	   // Stack bereinigen
   					
   		loop_end:	
-  					//subq.l #1, sp alternativ sub quick
+  					
   				    sub.l #1,d3
   				    bge loop_out  //branch greater equal loop_cnt
   				    
@@ -87,7 +88,7 @@
   void strgoutrevalt(){
     	
 
-    	char stralt[]=" Stringlystring";
+    	char stralt[]="Stringlystring";
     	printf(" String: %s\r\n",stralt);
     	asm{
     					bra start
@@ -95,7 +96,7 @@
     					lea stralt, a2 		 // stralt in Adressregister a2
     										 // für loop_cnt
     					
-    					clr.l d3 	   		 // Register d1 löschen
+    					clr.l d3 	   		 // Register d3 löschen
     		
     		loop_cnt:
     				    add.l #1, d3   		 // increment counter in d3 um 1
@@ -109,19 +110,57 @@
     					move.b (a2,d3),-(sp) // Char auf Stack mittles Adressversatz
     										 // d3 counter als byteweiser Adressversatz
     					jsr TERM_Write		 // Jump to Subroutine
-    					adda.l #1, sp		 // Speicher auf Stack reservieren
+    					adda.l #1, sp		 // Speicher auf Stack freigeben
     					subq.l #1, d3		 // Counter erniedrigen
+    					
+    					
     					tst.b d3			 //	Test ob Counter 0
-    					subq.l #1, sp		 // Stackspeicher wieder freigeben
     					
-    					beq loop_end		 //	
     					
-    					bra loop_out  		 //branch greater equal loop_out
+    					blt loop_end		 //	Falls Counter kleiner 0 Springe Ende
+    					
+    					bra loop_out  		 //branch loop_out
     					
     		loop_end:				  		 //Marke zum beenden der Schleife
 	
     	}
   	TERM_WriteLn();
+  }
+  
+  void strgoutRevWithoutCount(){
+	  	char strgr[]=" Stringlystring";
+	  	printf(" String: %s\r\n",strgr);
+	  	asm{
+	  		
+	  					lea strgr, a2 // strg in Adressregister a2
+	  					move.l a2, a3 // kopie für Strgr
+	  					clr.l d3 	  // Register d3 löschen
+	  		
+	  		loop_cnt:
+	  				    
+	  				    tst.b (a2)+	  // test auf a2 null und  
+	  				    			  // (a2)+ Byteweise verschieben
+	  				    bne loop_cnt  // branch not equal
+
+	  			        sub.l #1, a2  // Zeiger um 1 zurückgesetzt (jetzt auf \0 am String Ende)
+
+	  			        bra loop_end  // Sprung ans Schleifenende
+	  			                      // => auch leere Strings werden richtig behandelt
+	  			                      // => Schleife muss von (AnzahlZeichen - 1) downto 0 laufen
+	  			        
+	  		loop_out:	
+	  					move.b -(a2),-(sp) // -(a2) da wir ja nich \0 Ende zeichen ausgeben wollen
+	  					jsr TERM_Write	   // Zeichen ausgeben
+	  					adda.l #1, sp	   // Stack bereinigen
+	  					
+	  		loop_end:
+	  					cmpa.l a2,a3
+	  				    bne loop_out  // branch not equal loop_out
+	  				    			  // falls gleich beende
+				
+	  	}
+		TERM_WriteLn();
+	  
   }
 
   void IntroUe01(){
