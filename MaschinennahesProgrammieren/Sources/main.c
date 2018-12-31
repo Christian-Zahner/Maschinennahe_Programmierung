@@ -59,7 +59,7 @@ void main(void)
   int counter = 0;
   char strg1[20] 	= "String1";
   char strg2[20] 	= "leer";
-  int zahl			= 4783;
+  int zahl			= 0x12AF;
   
   unsigned long vorher  = 0x00000010;
   unsigned long nachher = 0x00000000;
@@ -89,7 +89,7 @@ void main(void)
   
   /**** Uebung 02 ******************************************************************************/ 
   
-  	IntroUe02();
+  	/*IntroUe02();
   	 
   	//strgoutrev();		     // Nach Musterlösung
   	 
@@ -97,7 +97,7 @@ void main(void)
   	
   	strgoutRevWithoutCount(); // Ohne Counter	
   	
-  	outro();
+  	outro();*/
   	
   /**** Uebung 02a ******************************************************************************/ 
     
@@ -154,7 +154,7 @@ void main(void)
 	
 	/**** Uebung 07a **************************************************************************/
   
-  	/*IntroUe07A();
+  	IntroUe07A();
   	
   	printf("\r\nZahl vorher  = 0x%08lX und als Integer = %lu\r\nBitmuster: ",vorher, vorher);
   	printbit(vorher);
@@ -164,7 +164,7 @@ void main(void)
 	printf("\r\nZahl nachher = 0x%08lX und als Integer = %lu\r\nBitmuster: ",nachher, nachher);
 	printbit(nachher);
 	
-  	outro();*/
+  	outro();
 	
 	/**** Uebung 08 **************************************************************************/
   

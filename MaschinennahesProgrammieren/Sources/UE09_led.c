@@ -66,10 +66,10 @@
   #define SETTC				 	 0x4010003F // Set Pin bzw. "LEDS" 
   #define CLRTC			 		 0x40100057	// Schreiben an "LEDS"
 
-  #define PORTTC0				 0x00000001
-  #define PORTTC1   			 0x00000002
-  #define PORTTC2   			 0x00000004
-  #define PORTTC3  				 0x00000008
+  #define PORTTC0				 0x00000001 // LED 01 
+  #define PORTTC1   			 0x00000002 // LED 02
+  #define PORTTC2   			 0x00000004	// LED 03
+  #define PORTTC3  				 0x00000008	// LED 04
 
 
    /* Defines for interrupt */

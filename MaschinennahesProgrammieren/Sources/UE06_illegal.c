@@ -39,7 +39,7 @@ void illegal(){
 		              adda    #4, sp			 // Stack freigeben
 		              
 		              add.l  #2, 4(sp)		     // Den auf dem Stack gespeicherten 
-		                                         // PC auf den nächsten Befehl setzen.
+		              // +2 illegal 32 bit		 // PC auf den nächsten Befehl setzen.
 		                                         // WICHTIGER HINWEIS:
 		                                         // Das ist i.A. keine sinnvolle Behandlung der Exception!!!
 		              rte               		 // Return from Exception

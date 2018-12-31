@@ -34,8 +34,9 @@
 	void* mymemcopy(void* ziel, const void* quelle, size_t anzahl){
 		
 		
-		asm{ naked
-
+		asm{ naked						// selbst kümmern um Stack
+										// Nur Eingabeparameter 
+										// liegen bereits darauf
 				link 	a6,#0			//FP sichern
 				adda 	#-12,sp			//Platz für Register auf Stack machen
 				movem.l d2/a2-a3,(sp)	//Register sichern

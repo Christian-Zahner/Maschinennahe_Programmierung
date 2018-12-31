@@ -60,7 +60,7 @@ int lstint(void){
 			 // weil dafür "register_abi" gilt (nicht compact_abi)
  	 	 	 
  	 	 	 
-	 	 	  move.l	#6, d0			    // für malloc grösse
+	 	 	  move.l	#6, d0			    // für malloc groesse muss in d0 sein
  	 	 	  jsr		malloc				// bereits stellen von N Bytes auf Speicher
  	 	 	  	  	  	  	  	  	  	  	// Anzahl N steht in d0
 

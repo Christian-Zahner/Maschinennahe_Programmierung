@@ -38,11 +38,19 @@ void hexUP(int zahl){
   		           move.w  d5,d3           //kopieren nach d3
   		           lsr.l   d4,d3           //12/8/4/0 Bit nach rechts schieben  
 
-  		           andi.l  #0x000f,d3      //Nibble ermitteln
-  		           addi.l  #'0',d3         //in ASCII umwandeln
-  		           cmpi.l  #'9',d3
-  		           ble.b   kein_buchstabe
-  		           addi.l  #'A'-'0'-10,d3  //Hex-Ziffern A - F
+  		           andi.l	#0x000f,d3		// Maske zum löschen 
+  		         	  						// der linkesten 12 Bit
+  		           addi.l     #'0',d3       // in ASCII umwandeln
+  		           cmpi.l     #'9',d3	  	// 9 Ascii ist 57
+  		         	  						// Compare zieht 57 von d3 ab
+  		         	  						// anschließend werde je nach 	
+  		         	  						// Ergebnis das CCR gesetzt
+  		           ble.b   kein_buchstabe	// Sprung wenn Zahl
+  		           addi.l  #'A'-'0'-10,d3   // Hex-Ziffern A - F ermitteln
+  		         	                    	// ASCII Muster von A 
+  		         	                    	// Von vorher Binär Muster 0 
+  		         	                    	// ASCII abziehen. 
+  		         	                    	// -10 da A = 10 ansonsten Buchstaben ab J
   		           
   		     kein_buchstabe: 
   		     

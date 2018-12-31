@@ -62,7 +62,7 @@ void trap(){
 			 	  lea BS, a1					 // Laden der Adresse des Labels/Marke in a1
 			 	  move.l  a1, MEMOFFSET+0x80 	 // Adresse von BS an TRAP Vektor Nr 0 hängen
 	 	 	 		
-			 	  lea usrstack[20], a0			 // "usrstack" in ao
+			 	  lea usrstack[20], a0			 // "usrstack" in a0
 			 	  move.l a0, USP				 // USP um größe usrstack versetzen
 			 	
 			 	 

@@ -36,18 +36,18 @@ unsigned long bitrevUp(unsigned long quelle, unsigned long ziel){
 				clr.l		d0		 			// Datenregister mit 0 initialisieren					
 				clr.l		d3					// Beginn am "0ten" Bit mit Bitset bis 31. Bit
 			
-				moveq.l		#31, d2				// Anzahl ist wieviele Bits sollen kopiert werden
+				moveq.l		#31, d2				// Anzahl ist von welchen Bit aus kopiert wird
 												// bzw. die Position von 31 bis 0
 				bra 		looptst
 				
 	looptst:	
 				tst.b		d2					// testen d2 0?
 				blt			end
-				btst.l		d2, d1				// Bit an position 1 oder 0
+				btst.l		d2, d1				// Ist Bit an Position 1 oder 0 gesetzt
 				bgt			bitset
 				
 				addi.l		#1, d3				// naechste Bit Stelle die gesetzt werden soll
-				subi.l  	#1, d2				// naechste Bit Position die geteste wird
+				subi.l  	#1, d2				// naechste Bit Position die getestet wird
 
 				bra 		looptst
 	bitset:		
@@ -91,11 +91,9 @@ void printbit(unsigned long zahl){
 		outptloop:	
 					subi.l  	#1, d3				// wieder an Stelle 31 beginnend
 					btst.l		d3, d4				// Bittesten ist es 1 oder 0
-					beq			zero				// sollte es 0 sein wird 
-													// Zerobit in CCR gesetzt
-					
-					bra			one					// Ansonsten stand an der Stelle 	
-													// eine Eins
+					bgt			one					// sollte das Bit 1 sein wird 
+													// Zerobit in CCR nicht gesetzt
+				
 					
 		zero:		
 		  	  	  	pea 		zer 			 	// Adresse char zero auf Stack pushen	 
