@@ -33,69 +33,72 @@ void trap(){
 		
 		  	  bra start
 		  	  
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
 		  	  
 		  	  
-		 BS:                       				 // "Betriebssystem", hier nur Ausgabe eines Texts
-		                                		 // Adresse des Textes wird als Parameter auf 
-		      	  	  	  	  	  	  	  	  	 // dem User-Stack erwartet
-		                                
-		          move.l a2, -(SP)      		 // a2 sichern
+		 BS:                       	// "Betriebssystem", hier nur Ausgabe eines Texts
+		                            // Adresse des Textes wird als Parameter auf 
+		      	  	  	  	  	  	// dem User-Stack erwartet
+		                        
+		     move.l a2, -(SP)      	// a2 sichern
 		          
-		          move   USP, a2        		 // UserStackPointer nach a2 holen
-		          move.l (a2),-(SP)     		 // Adresse des Strings von UserStack holen 
-		          	  	  	  	  	  	  	  	 // und auf aktuellen Stack (=SystemStack) speichern
-		          jsr TERM_WriteString 			 // String ausgeben
-		          lea     4(SP), SP     		 // Stack cleanup
+		     move   USP, a2        	// UserStackPointer nach a2 holen
+		     move.l (a2),-(SP)      // Adresse des Strings von UserStack holen 
+		          	  	  	  	  	// und auf aktuellen Stack (=SystemStack) speichern
+		     jsr TERM_WriteString 	// String ausgeben
+		     lea     4(SP), SP     	// Stack cleanup
 
-		          adda.l #4, a2         		 // USP bereinigen: USP + 4, 
-		          	  	  	  	  	  	  	  	 // [alternativ: lea 4(a2),a2]
-		          move   a2, USP   				 // veränderten USP in a2 den USP übergeben
+		     adda.l #4, a2         	// USP bereinigen: USP + 4, 
+		          	  	  	  	  	// [alternativ: lea 4(a2),a2]
+		     move   a2, USP   		// veränderten USP in a2 den USP übergeben
 		          
-		          move.l (SP)+, a2     			 // a2 restaurieren
+		     move.l (SP)+, a2     	// a2 restaurieren
 		 	 	 
-				  rte							 // Komisch da TRAP als Exception behandelt wird
+			 rte					// Komisch da TRAP als Exception behandelt wird
 				  
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
 		  	  
 		start:	
-			 	  lea BS, a1					 // Laden der Adresse des Labels/Marke in a1
-			 	  move.l  a1, MEMOFFSET+0x80 	 // Adresse von BS an TRAP Vektor Nr 0 hängen
+			 lea BS, a1					 // Laden der Adresse des Labels/Marke in a1
+			 move.l  a1, MEMOFFSET+0x80  // Adresse von BS an TRAP Vektor Nr 0 hängen
 	 	 	 		
-			 	  lea usrstack[20], a0			 // "usrstack" in a0
-			 	  move.l a0, USP				 // USP um größe usrstack versetzen
+			 lea usrstack[20], a0	  	 // "usrstack" in a0
+			 move.l a0, USP				 // USP um größe usrstack versetzen
 			 	
 			 	 
 			 	
-			 	  move.w SR,d2					 // Statusregister in Dataregister laden
-			 	  andi.l #0xDFFF, d2			 // Maske mit Statusregister UND Verknüpfen
-			 	  	  	  	  	  	  	  	  	 // Um Bit Nr. 13 (S Bit) auf 0 zusetzen
-			 	  	  	  	  	  	  	  	  	 // Um Useermode zu aktivieren alle anderen Bits
-			 	  	  	  	  	  	  	  	  	 // Des Statusregisters bleiben unberührt
-			 	  	  	  	  	  	  	  	  	 // DFFF ist 1101 1111 1111 1111
-			 	  move.w d2,SR					 // Verändertes Statusregister von d2 ins
-			 	  	  	  	  	  	  	  	  	 // Statusregister kopieren jetzt ist der User mode
-			 	  	  	  	  	  	  	  	  	 // aktiviert
+			 move.w SR,d2				 // Statusregister in Dataregister laden
+			 andi.l #0xDFFF, d2			 // Maske mit Statusregister UND Verknüpfen
+			 	  	  	  	  	  	  	 // Um Bit Nr. 13 (S Bit) auf 0 zusetzen
+			 	  	  	  	  	  	  	 // Um Useermode zu aktivieren alle anderen 
+			 	  	  	  	  	  	  	 // Bits es Statusregisters bleiben unberührt
+			 	  	  	  	  	  	  	 // DFFF ist 1101 1111 1111 1111
+			 move.w d2,SR			 	 // Verändertes Statusregister von d2 ins
+			 	  	  	  	  	  	  	 // Statusregister kopieren jetzt ist der 
+			 	  	  	  	  	  	  	 // User Mode aktiviert
 			 	 
-			 	  bra usrstrt
+			 bra usrstrt
 			 	 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
 
 		usrstrt:	
 		
-				  pea strtxt					 // selbst erklärend
-				  jsr TERM_WriteString
-				  adda.l #4, SP					 // Cleanup Stack
+			pea strtxt					// selbst erklärend
+			jsr TERM_WriteString
+			adda.l #4, SP				// Cleanup Stack
 				
 				
-				  pea bstxt						 // hier wird da wir im Usermode sind mittles USP
-				  	  	  	  	  	  	  	  	 // auf den Stack geschrieben wichtig später brauchen wir
-				  	  	  	  	  	  	  	  	 // den USP (Userstackpointer) um den String zu bekommen
-	 	 	 	  TRAP #0
+			pea bstxt					// hier wird, da im Usermode sind mittles 
+				  	  	  	  	  	  	// USP auf den Stack geschrieben 
+										// wichtig später brauchen wir
+				  	  	  	  	  	  	// den USP (Userstackpointer) um den 
+										// String zu bekommen
+	 	 	TRAP #0
 	 	 	 	 
-	 	 	 	  pea endtxt					 // Was passiert hier? Ein Zauberer verrät nie seine Tricks!
-	 	 	 	  jsr TERM_WriteString	
-	 	 	 	  add.l #4, SP					 // Cleanup Stack
+	 	 	pea endtxt					// Was passiert hier? 
+	 	 								// Ein Zauberer verrät nie seine Tricks!
+	 	 	jsr TERM_WriteString	
+	 	 	add.l #4, SP				// Cleanup Stack
 
 	}
 	

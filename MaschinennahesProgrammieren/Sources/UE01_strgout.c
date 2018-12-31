@@ -64,14 +64,17 @@
   				    bne loop_cnt  // branch not equal
   					
   			        sub.l #1, d3  // Anzahl Zeichen im String ohne 0-Byte
-  			        sub.l #1, a2  // Zeiger um 1 zurückgesetzt (jetzt auf \0 am String Ende)
+  			        sub.l #1, a2  // Zeiger um 1 zurückgesetzt 
+  			        			  //jetzt auf \0 am String Ende
 
   			        bra loop_end  // Sprung ans Schleifenende
   			                      // => auch leere Strings werden richtig behandelt
-  			                      // => Schleife muss von (AnzahlZeichen - 1) downto 0 laufen
+  			                      // => Schleife muss von (AnzahlZeichen - 1)
+  			        			  // downto 0 laufen
   			        
   		loop_out:	
-					move.b -(a2),-(sp) // -(a2) da wir ja nich \0 Ende zeichen ausgeben wollen
+					move.b -(a2),-(sp) // -(a2) da wir ja nicht  
+									   // das Ende \0 Zeichen ausgeben wollen
 					jsr TERM_Write	   // Zeichen ausgeben
 					adda.l #1, sp	   // Stack bereinigen
   					
@@ -142,14 +145,16 @@
 	  				    			  // (a2)+ Byteweise verschieben
 	  				    bne loop_cnt  // branch not equal
 
-	  			        sub.l #1, a2  // Zeiger um 1 zurückgesetzt (jetzt auf \0 am String Ende)
+	  			        sub.l #1, a2  // Zeiger um 1 zurückgesetzt (auf \0 String Ende)
 
 	  			        bra loop_end  // Sprung ans Schleifenende
 	  			                      // => auch leere Strings werden richtig behandelt
-	  			                      // => Schleife muss von (AnzahlZeichen - 1) downto 0 laufen
+	  			                      // => Schleife muss von (AnzahlZeichen - 1) 
+	  			        			  //downto 0 laufen
 	  			        
 	  		loop_out:	
-	  					move.b -(a2),-(sp) // -(a2) da wir ja nich \0 Ende zeichen ausgeben wollen
+	  					move.b -(a2),-(sp) // -(a2) da wir ja nicht  
+						   	   	   	   	   // das Ende \0 Zeichen ausgeben wollen
 	  					jsr TERM_Write	   // Zeichen ausgeben
 	  					adda.l #1, sp	   // Stack bereinigen
 	  					

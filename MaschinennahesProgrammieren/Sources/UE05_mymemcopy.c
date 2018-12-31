@@ -23,13 +23,6 @@
  * 			Frame- und Return-Code in Assembler					*
  ****************************************************************/
 
-	void introUe5(){
-		TERM_WriteString("\r\n########################################################################\r\n");
-		TERM_WriteString("\r\nUebung05: mymmemcopy\r\n");
-		TERM_WriteString("Erstellung und Test eines Unterprogramms mymemcopy (analog zu memcopy)\r\n");
-		TERM_WriteString("und Aufruf des Unterprogramms aus C\r\n");
-		TERM_WriteString("\r\n########################################################################\r\n");
-	}
 
 	void* mymemcopy(void* ziel, const void* quelle, size_t anzahl){
 		
@@ -61,6 +54,14 @@
 
 		}
 		
+	}
+	
+	void introUe5(){
+		TERM_WriteString("\r\n########################################################################\r\n");
+		TERM_WriteString("\r\nUebung05: mymmemcopy\r\n");
+		TERM_WriteString("Erstellung und Test eines Unterprogramms mymemcopy (analog zu memcopy)\r\n");
+		TERM_WriteString("und Aufruf des Unterprogramms aus C\r\n");
+		TERM_WriteString("\r\n########################################################################\r\n");
 	}
 	
 	void outro(){

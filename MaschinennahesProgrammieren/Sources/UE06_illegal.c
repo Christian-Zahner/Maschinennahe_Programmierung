@@ -41,7 +41,8 @@ void illegal(){
 		              add.l  #2, 4(sp)		     // Den auf dem Stack gespeicherten 
 		              // +2 illegal 32 bit		 // PC auf den nächsten Befehl setzen.
 		                                         // WICHTIGER HINWEIS:
-		                                         // Das ist i.A. keine sinnvolle Behandlung der Exception!!!
+		                                         // Das ist i.A. keine sinnvolle Behandlung
+		              	  	  	  	  	  	  	 // der Exception!!!
 		              rte               		 // Return from Exception
 
 
