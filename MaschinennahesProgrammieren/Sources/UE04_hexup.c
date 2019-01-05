@@ -72,8 +72,8 @@ void hexUP(int zahl){
 
   		     start:                        //"Hauptprogramm" 
   		     
-  		     	   //pea zahl				   //Push effective address auf Stack
-  		     	   //jsr TERM_WriteString	   // jsr TERM_WriteString
+  		     	   pea zahl				   //Push effective address auf Stack
+  		     	   jsr INOUT_WriteInt	   //jsr INOUT_WriteInt
   		     	   adda #4,sp	 		   //Stackbereinigen
   		     	   jsr     TERM_WriteLn    //neuZeile
   		     	   
