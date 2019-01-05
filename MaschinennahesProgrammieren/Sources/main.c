@@ -47,6 +47,7 @@
 #include "HexDaten.h"
 #include "UE09_LED.h"
 #include "UE11_Echo.h"
+#include "Klausur.h"
 
 // - Bitte darauf achten, dass am Coldfire-Serial Port ein  
 //   Terminal (Putty o.ä.) mit 19200kBaud angeschlossen ist.
@@ -154,7 +155,7 @@ void main(void)
 	
 	/**** Uebung 07a **************************************************************************/
   
-  	IntroUe07A();
+  	/*IntroUe07A();
   	
   	printf("\r\nZahl vorher  = 0x%08lX und als Integer = %lu\r\nBitmuster: ",vorher, vorher);
   	printbit(vorher);
@@ -164,7 +165,7 @@ void main(void)
 	printf("\r\nZahl nachher = 0x%08lX und als Integer = %lu\r\nBitmuster: ",nachher, nachher);
 	printbit(nachher);
 	
-  	outro();
+  	outro();*/
 	
 	/**** Uebung 08 **************************************************************************/
   
@@ -222,7 +223,9 @@ void main(void)
 
 	//lftdoor();
   
-	
+	/**** Klausur ****************************************************************************/
+  	
+  	mul();
 	
 // Als Ende-Behandlung nachfolgend ein einfacher Leerlauf-Prozess 
 // *******************************************************************************************/
