@@ -25,9 +25,6 @@ void mul(void){
 	int i,x;
 	x = 1;
 	
-	INOUT_WriteInt(x);
-	TERM_WriteString("\r\n");
-	
 	if (x < 7){
 		for (i = 10; i >= 0; i--){
 			x = x*2;
@@ -35,6 +32,25 @@ void mul(void){
 	x = x*5;
 	}
 	
-	INOUT_WriteInt(x);
-	TERM_WriteString("\r\n");
+	switch (i){
+	 
+	case 1: 
+		x = 1;
+		break;
+	
+	case 2: 
+		x = 2; 
+		break;
+	
+	case 3: 
+		x = 3; 
+		break;
+	
+	default: x = 99;
+	
+	do{
+		x = x + 1;
+	}while(x < 100);
+	
+	}
 }
