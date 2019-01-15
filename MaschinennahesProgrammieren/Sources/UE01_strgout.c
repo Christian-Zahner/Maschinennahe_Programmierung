@@ -17,7 +17,7 @@
 
   void strgout(){
 
-  	char strg[]="Stringlystring\r\n";
+  	char strg[]="Stringlystring";
   	
   	asm{
   					bra start
@@ -49,12 +49,13 @@
   
   void strgoutrev(){
 
-  	char strgr[]=" Stringlystring";
-  	printf(" String: %s\r\n",strgr);
+  	char strgr1[]="Stringlystring";
+  	printf(" String: %s\r\n",strgr1);
+  	printf("String: ");
   	asm{
   					bra start
   		start:			
-  					lea strgr, a2 // strg in Adressregister a2
+  					lea strgr1, a2 // strg in Adressregister a2
   					clr.l d3 	  // Register d1 löschen
   		
   		loop_cnt:
@@ -65,7 +66,7 @@
   					
   			        sub.l #1, d3  // Anzahl Zeichen im String ohne 0-Byte
   			        sub.l #1, a2  // Zeiger um 1 zurückgesetzt 
-  			        			  //jetzt auf \0 am String Ende
+  			        			  // jetzt auf \0 am String Ende
 
   			        bra loop_end  // Sprung ans Schleifenende
   			                      // => auch leere Strings werden richtig behandelt
@@ -93,6 +94,7 @@
 
     	char stralt[]="Stringlystring";
     	printf(" String: %s\r\n",stralt);
+    	printf("String: ");
     	asm{
     					bra start
     		start:			
@@ -107,7 +109,7 @@
     				    			   	     // (a2)+ Byteweise verschieben
     				    bne loop_cnt   		 // branch not equal
     					
-    			        sub.l #1, d3  	     // Anzahl Zeichen im String ohne 0-Byte
+    			        sub.l #2, d3  	     // Anzahl Zeichen im String ohne 0-Byte
     			        lea stralt, a2		 // zurücksetzen der Adresse
     		loop_out:	
     					move.b (a2,d3),-(sp) // Char auf Stack mittles Adressversatz
@@ -131,11 +133,12 @@
   }
   
   void strgoutRevWithoutCount(){
-	  	char strgr[]=" Stringlystring";
-	  	printf(" String: %s\r\n",strgr);
+	  	char strgr2[]="Stringlystring";
+	  	printf(" String: %s\r\n",strgr2);
+	  	printf("String: ");
 	  	asm{
 	  		
-	  					lea strgr, a2 // strg in Adressregister a2
+	  					lea strgr2, a2 // strg in Adressregister a2
 	  					move.l a2, a3 // kopie für Strgr
 	  					clr.l d3 	  // Register d3 löschen
 	  		
@@ -179,5 +182,5 @@
 		TERM_WriteString("\n########################################################################\r\n");
 		TERM_WriteString("\nUebung02: Ausgabe eines Strings (rueckwaerts)\r\n");
 		TERM_WriteString("Wie Ue01 aber rueckwaerts (beginnend mit dem letzten Zeichen) ausgeben\r\n");
-		TERM_WriteString("\n########################################################################\r\n\n");
+		TERM_WriteString("\n########################################################################\r\n\n\r");
   }

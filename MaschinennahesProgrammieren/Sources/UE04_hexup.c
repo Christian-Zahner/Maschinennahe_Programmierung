@@ -40,8 +40,8 @@ void hexUP(int zahl){
 
   		           andi.l	#0x000f,d3		// Maske zum löschen 
   		         	  						// der linkesten 12 Bit
-  		           addi.l     #'0',d3       // in ASCII umwandeln
-  		           cmpi.l     #'9',d3	  	// 9 Ascii ist 57
+  		           addi.l   #'0',d3      	// in ASCII umwandeln
+  		           cmpi.l   #'9',d3	  		// 9 Ascii ist 57
   		         	  						// Compare zieht 57 von d3 ab
   		         	  						// anschließend werde je nach 	
   		         	  						// Ergebnis das CCR gesetzt
@@ -72,19 +72,19 @@ void hexUP(int zahl){
 
   		     start:                        //"Hauptprogramm" 
   		     
-  		     	   pea zahl				   //Push effective address auf Stack
-  		     	   jsr INOUT_WriteInt	   //jsr INOUT_WriteInt
-  		     	   adda #4,sp	 		   //Stackbereinigen
-  		     	   jsr     TERM_WriteLn    //neuZeile
+  		     	   //pea zahl			   //Push effective address auf Stack 
+  		     	 	 	 	 	 	 	   //geht nicht INOUT_WriteInt braucht 
+  		     	 	 	 	 	 	 	   //Zahl(Int 16) nicht Addresse(32)
+  		     	   move.w  zahl,-(sp)
+  		     	   //jsr INOUT_WriteInt	   //jsr INOUT_WriteInt
+  		     	   //adda #2,sp	 		   //Stackbereinigen
+  		     	   //jsr  TERM_WriteLn     //neuZeile
   		     	   
-  		           move.w  zahl,-(sp)      //Parameter auf den Stack (Word=16 Bit)
+  		           //move.w  zahl,-(sp)    //Parameter auf den Stack (Word=16 Bit)
   		           jsr     hexup           //Aufruf des Unterprogramms hexup
   		           adda   #2,sp            //Clear Stack (Word=16 Bit)
   		           
   		     }
-
-	TERM_WriteLn();
-	
 	}
 
 void IntroUe04(int zahl){
@@ -93,6 +93,8 @@ void IntroUe04(int zahl){
 	TERM_WriteString("Umgestalten von Ue03 zu einem Unterprogramm gemaess Aufrufkonvention\r\n");
 	TERM_WriteString("unseres Compilers und Aufruf des Unterprogramms aus Assembler\r\n");
 	TERM_WriteString("\n########################################################################\r\n\n");
+	TERM_WriteString("Zahl als Decimal: ");
 	INOUT_WriteInt(zahl);
 	TERM_WriteLn();
+	TERM_WriteString("Zahl als Hexadec: ");
 }
